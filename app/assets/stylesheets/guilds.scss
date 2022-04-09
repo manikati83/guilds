@@ -1,0 +1,69 @@
+// Place all the styles related to the guilds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.build-btn{
+  text-align: right;
+  margin-top: 50px;
+  margin-right: 20px;
+}
+
+.heading{
+  font-size: 1.5em;
+  margin-bottom: 30px;
+}
+
+.media{
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.media h3{
+  font-size: 1.5em;
+}
+
+.media:hover .guild-name{
+  color: #FF8856;
+}
+
+.media li{
+  font-size: 1.2em;
+}
+
+.media p{
+  margin-bottom: 5px;
+  margin-left: 40px;
+  display: inline-block;
+  font-size: 1.2em;
+}
+
+/* guilds/search */
+#search{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+#search-box{
+  padding-right: 0;
+}
+
+#search-btn{
+  text-align: right;
+}
+
+
+/*guild/show */
+#img-box{
+  text-align:center;
+}
+
+#guild-img{
+  max-width: 100%;
+  height: 300px;
+}
+
+.guild-master{
+  text-align: center;
+  margin: 30px;
+}

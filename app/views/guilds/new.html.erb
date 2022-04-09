@@ -1,0 +1,41 @@
+<div class="container">
+  <div>
+    <h2>新規ギルド設立</h2>
+  </div>
+  <div>
+    <%= form_with(model: @guild, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :name, 'ギルド名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :hashbody, 'ギルドタグ' %>
+        <%= f.label :hashbody, 'タグの先頭に#を付け複数入力する場合はスペースで区切って下さい。(例：#画像加工 #情報交換)' %>
+        <%= f.text_field :hashbody, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :guild_type, 'ギルドタイプ' %>
+        <%= f.radio_button :guild_type, true, checked: true %>
+        <%= f.label :guild_type, '依頼ありギルド', {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :guild_type, false %>
+        <%= f.label :guild_type, '依頼なしギルド', {value: :false, style: "display: inline-block;"} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :join_type, 'ギルド加入設定' %>
+        <%= f.radio_button :join_type, true, checked: true %>
+        <%= f.label :join_type, '承認あり', {value: :true, style: "display: inline-block;"} %>
+        <%= f.radio_button :join_type, false %>
+        <%= f.label :join_type, '承認なし', {value: :false, style: "display: inline-block;"} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :limit_member, 'ギルド人数上限' %>
+        <%= f.number_field :limit_member, min: 1, max:99 %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content, 'ギルド紹介文' %>
+        <%= f.text_area :content, class: 'form-control', rows: 5 %>
+      </div>
+      <%= f.submit 'ギルド設立', class: 'btn btn-success' %>
+    <% end %>
+  </div>
+</div>

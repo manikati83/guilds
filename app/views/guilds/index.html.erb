@@ -1,0 +1,14 @@
+<div class="container">
+  <div>
+    <p class="build-btn">
+      <%= link_to "ギルドを設立", new_guild_path, class: 'btn btn-success' %>
+    </p>
+  </div>
+  <div>
+    <h3 class="heading">承認待ちギルド</h3>
+  </div>
+  <div>
+    <h3 class="heading">加入ギルド</h3>
+    <%= render 'guilds/guilds', guilds: @join_guilds %>
+  </div>
+</div>

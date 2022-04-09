@@ -1,0 +1,30 @@
+// Place all the styles related to the toppages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.top-group{
+  background-color: #616161;
+}
+
+.row{
+  margin-right: 0;
+}
+
+.top h1{
+  padding-top: 80px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-size: 50px;
+  text-align: center;
+}
+
+.top p{
+  color: #DDD;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.top .btn{
+  background-color: #A1887F;
+  color: #FFF;
+  margin-bottom: 50px;
+}

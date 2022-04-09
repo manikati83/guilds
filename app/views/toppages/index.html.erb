@@ -1,0 +1,32 @@
+<% if logged_in? %>
+  <div class="container">
+    <div>
+      <h3>加入ギルド</h3>
+      <%= render 'guilds/guilds', guilds: @join_guilds %>
+    </div>
+    <div>
+      <h3>おすすめギルド</h3>
+      <%= render 'guilds/guilds', guilds: @favorite_guilds %>
+    </div>
+  </div>
+<% else %>
+  <div class="row justify-content-center top-group">
+    <div class="top col-8">
+      <h1>ギルドを設立して個人から組織へ</h1>
+      <p>今まで個人での活動をギルドを作り複数人で行うことにより、問題解決能力、クオリティーを高めもう一つ上のステップへ導きます。
+      ギルドには様々な機能があり、使い方次第でギルドの在り方がグッと高まるでしょう。</p>
+      <p class="text-center">
+      <%= link_to "Guildsに登録", signup_path, class: 'btn' %>
+      </p>
+    </div>
+  </div>
+  
+  <div>
+    <h3>Guildsで出来ること</h3>
+    <ul>
+      <li>ギルド外のユーザーへサービスの提供</li>
+      <li>ギルドへ依頼</li>
+      <li>ギルド内だけの活動も</li>
+    </ul>
+  </div>
+<% end %>

@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+
+header .navbar{
+  background-color: #673BB7;
+  color: white;
+}

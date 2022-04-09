@@ -1,0 +1,33 @@
+<div>
+  <h1><%= @guild.name %></h1>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <ul class="navbar-nav mr-auto"></ul>
+    <ul class="navbar-nav">
+      <li class="nav-item"><%= link_to 'ギルドブログ', root_path, class: 'nav-link' %></li>
+      <li class="nav-item"><%= link_to 'ギルドギャラリー', root_path, class: 'nav-link' %></li>
+      <li class="nav-item"><%= link_to 'ギルドへ依頼', root_path, class: 'nav-link' %></li>
+      <li class="nav-item"><%= link_to '加入申請', root_path, class: 'nav-link' %></li>
+    </ul>
+  </nav>
+</div>
+<div id="img-box">
+  <% if !@guild.image.nil? %>
+    <%= image_tag @guild.image, id: 'guild-img' %>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="co-md-4 guild-master">
+    <h4>ギルドマスター</h4>
+    <div class="card">
+      <img class="rounded" src="<%= gravatar_url(@guild.user, { size: 150 }) %>" alt="">
+      <%= link_to @guild.user.name, user_path(id: @guild.user.id) %>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h3>ギルド紹介</h3>
+    <div>
+      <p><%= @guild.content %></p>
+    </div>
+  </div>
+</div>
