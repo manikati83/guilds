@@ -10,5 +10,15 @@ Rails.application.routes.draw do
   
   get 'search', to: 'guilds#search'
   get 'tags', to: 'guilds#tags'
-  resources :guilds
+  resources :guilds do
+    member do
+      get :blogs
+      get :members
+      get :approval_members
+    end
+  end
+  
+  resources :guild_members
+  resources :blogs
+  resources :approvals
 end

@@ -1,31 +1,14 @@
 <div>
   <%= render 'guilds/navbar' %>
 </div>
-<div id="img-box">
-  <% if !@guild.image.nil? %>
-    <%= image_tag @guild.image, id: 'guild-img' %>
+<div class="container">
+  <% if @guild.members.include?(current_user) %>
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <li class="nav-item"><a href="<%= members_guild_path %>" class="nav-link <%= 'active' if current_page?(members_guild_path) %>">ギルドメンバー <span class="badge badge-secondary"><%= @members.count %></span></a></li>
+      <li class="nav-item"><a href="<%= approval_members_guild_path %>" class="nav-link <%= 'active' if current_page?(approval_members_guild_path) %>">承認待ちユーザー <span class="badge badge-secondary"><%= @approvals.count %></span></a></li>
+    </ul>
   <% end %>
-</div>
-
-<div class="container">
-<div class="row">
-  <div class="co-md-4 guild-master">
-    <h4>ギルドマスター</h4>
-    <div class="card">
-      <img class="rounded" src="<%= gravatar_url(@guild.user, { size: 150 }) %>" alt="">
-      <%= link_to @guild.user.name, user_path(id: @guild.user.id) %>
-    </div>
-  </div>
-  <div class="col-md-8 guild_content">
-    <h3>ギルド紹介</h3>
-    <div>
-      <p><%= safe_join(@guild.content.split("\n"),tag(:br)) %></p>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="container">
+  
   <h3>ギルドメンバー</h3>
     <% @members.each do |member| %>
       <div class="media bg-light rounded">
@@ -41,4 +24,4 @@
       </div>
     <% end %>
     <%= paginate @members %>
-  </div>
+</div>

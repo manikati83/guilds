@@ -3,6 +3,47 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
+/* _navbar */
+.menu-bar{
+  background-color: #333;
+}
+
+#nav {
+  overflow-x: auto;
+  background: fff;
+}
+
+#nav::-webkit-scrollbar {
+  display: none;
+ }
+
+#nav ul {
+  display: flex;
+  padding: 12px;
+  width: 100%;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+#nav li{
+  width: 180px;
+  text-align: center;
+  margin-right: 30px;
+}
+
+.menu{
+  text-decoration: none;
+  color: #FFF;
+  font-size: 1.3em;
+}
+
+#nav ul > li {
+  white-space: nowrap;
+}
+
+
+
+
 .build-btn{
   text-align: right;
   margin-top: 50px;
@@ -59,11 +100,38 @@
 }
 
 #guild-img{
-  max-width: 100%;
+  width: 100%;
   height: 300px;
+}
+
+@media screen and (max-width:600px){
+  #guild_img{
+    max-width: 100%;
+    height: 300px;
+  }
 }
 
 .guild-master{
   text-align: center;
   margin: 30px;
+}
+
+.guild_content{
+  margin: 30px;
+}
+
+
+/* guild/blog */
+.parent{
+  font-size: 1.3em;
+}
+.parent ul{
+  display: none;
+  font-size: 0.8em;
+}
+.active {
+  
+}
+.active ul {
+  display: block;
 }

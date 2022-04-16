@@ -1,0 +1,30 @@
+<div>
+  <%= render 'guilds/navbar' %>
+</div>
+<div class="container">
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item"><a href="<%= members_guild_path %>" class="nav-link <%= 'active' if current_page?(members_guild_path) %>">ギルドメンバー <span class="badge badge-secondary"><%= @members.count %></span></a></li>
+    <li class="nav-item"><a href="<%= approval_members_guild_path %>" class="nav-link <%= 'active' if current_page?(approval_members_guild_path) %>">承認待ちユーザー <span class="badge badge-secondary"><%= @approvals.count %></span></a></li>
+  </ul>
+  
+  <h3>承認待ちユーザー</h3>
+    <% @approvals.each do |approval| %>
+      <div class="media bg-light rounded">
+        <div class="media-body">
+          <h3><%= link_to approval.user.name, user_path(id: approval.user.id), class: 'guild-name' %></h3>
+          <p>ログイン履歴：<%= approval.user.login_at(approval.user) %>分前</p>
+          <%= form_with(model: @guild.guild_members.build, local: true) do |f| %>
+            <%= hidden_field_tag :guild_id, @guild.id %>
+            <%= hidden_field_tag :user_id, approval.user.id %>
+            <%= f.submit '許可', class: 'btn btn-success' %>
+          <% end %>
+          <%= form_with(model: @guild.approvals.find_by(user_id: approval.user.id), local: true, method: :delete, data: { confirm: "You sure?" }) do |f| %>
+            <%= hidden_field_tag :guild_id, @guild.id %>
+            <%= hidden_field_tag :user_id, approval.user.id %>
+            <%= f.submit '拒否', class: 'btn btn-danger' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @members %>
+</div>

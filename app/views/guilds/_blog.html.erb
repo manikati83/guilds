@@ -1,0 +1,12 @@
+<% blogs.each do |blog| %>
+  <div class="media bg-light rounded">
+    <div class="media-body">
+      <h3><%= link_to blog.title, blog_path(id: blog.id), class: 'guild-name' %></h3>
+      <% if blog.guild_blog_tag %>
+        <p>ブログタグ:<%= blog.guild_blog_tag.name %></p>
+      <% end %>
+      <p>作成日:<%= blog.created_at %></p>
+    </div>
+  </div>
+<% end %>
+<%= paginate blogs %>

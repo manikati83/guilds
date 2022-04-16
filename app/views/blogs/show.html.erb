@@ -1,0 +1,17 @@
+<%= render 'guilds/navbar' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @blog.title %>
+  
+  <% if @blog.guild_blog_tag %>
+    <strong>blog tag:</strong>
+    <%= @blog.guild_blog_tag.name %>
+  <% end %>
+  
+  <%= @blog.content %>
+</p>
+
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<%= link_to 'Back', blogs_guild_path(id: @blog.guild.id) %>

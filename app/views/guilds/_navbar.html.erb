@@ -1,0 +1,28 @@
+<div class="menu-bar">
+  <h1 class="text-white"><%= link_to @guild.name, guild_path(id: @guild.id) %></h1>
+  <nav id="nav">
+    <ul>
+      <li><%= link_to 'ギルドメンバー', members_guild_path(id: @guild.id), class: 'menu' %></li>
+      <li><%= link_to 'ギルドブログ', blogs_guild_path(id: @guild.id), class: 'menu' %></li>
+      <li><%= link_to 'ギルドギャラリー', root_path, class: 'menu' %></li>
+      <% if @guild.members.include?(current_user) %>
+        <li><%= link_to '依頼', root_path, class: 'menu' %></li>
+        <li><%= link_to 'ギルドチャット', root_path, class: 'menu' %></li>
+      <% else %>
+        <% if @guild.guild_type %>
+          <!-- 依頼ありギルド !-->
+          <li><%= link_to 'ギルドへ依頼', root_path, class: 'menu' %></li>
+          <li><%= link_to '加入申請', new_approval_path(id: @guild.id), class: 'menu' %></li>
+        <% else %>
+          <!-- 依頼なしギルド !-->
+          <li><%= link_to 'ギルドへ依頼', root_path, class: 'menu' %></li>
+          <%= form_with(model: current_user.guild_members.build, local: true) do |f| %>
+            <%= hidden_field_tag :guild_id, @guild.id %>
+            <%= hidden_field_tag :user_id, current_user.id %>
+            <%= f.submit '加入する', class: 'btn btn-primary btn-block' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </nav>
+</div>

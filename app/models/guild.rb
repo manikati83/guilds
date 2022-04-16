@@ -12,7 +12,10 @@ class Guild < ApplicationRecord
   has_many :hashtags, through: :guild_hashtag_relations
   
   has_many :guild_blog_tags
-  has_many :guild_blogs
+  has_many :blogs
+  
+  has_many :approvals, dependent: :destroy
+  has_many :approval_users, through: :approvals
   
   
   after_create do
@@ -32,5 +35,16 @@ class Guild < ApplicationRecord
       tag = Hashtag.find_or_create_by(hashname: hashtag.downcase.delete('#'))
       guild.hashtags << tag
     end
+  end
+  
+  def add_member(user)
+    if self.members.count < self.limit_member
+      self.guild_members.find_or_create_by(user_id: user.id)
+      self.approvals.find_by(user_id: user.id).destroy
+    end
+  end
+  
+  def del_member(uesr)
+    self.guild_members.find_by(user_id: user.id).destroy
   end
 end

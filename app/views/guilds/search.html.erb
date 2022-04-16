@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <h5>ギルドタグ</h5>
+        <% @guild_tags.each do |tag| %>
+          <li class="mb-2 ml-2" style="list-style: none;"><%= link_to tag.hashname, tags_path(id: tag.id), class: "text-dark" %><span class="ml-2">(<%= tag.guilds.count %>)</span></li></li>
+        <% end %>
+    </div>
+    <div class="col-9">
+      <%= search_form_for(@q, url:search_path) do |f| %>
+        <div class="row" id="search">
+          <div class="col-md-10" id="search-box">
+            <%= f.search_field :name_or_hashbody_cont, class: 'form-control mr-sm-2', placeholder: "Search" %>
+          </div>
+          <div class="col-md-2" id="search-btn">
+            <%= f.submit 'Search', class: 'btn btn-block btn-outline-primary my-2 my-sm-0' %>
+          </div>
+        </div>
+      <% end %>
+      <div>
+        <%= render 'guilds/guilds', guilds: @guilds %>
+      </div>
+    </div>
+  </div>
+</div>

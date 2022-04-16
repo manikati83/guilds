@@ -1,0 +1,38 @@
+<%= form_with(model: blog, local: true) do |form| %>
+  <% if blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+        <% blog.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= hidden_field_tag :guild_id, @guild.id %>
+
+  <div class="form form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-controller' %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.select :guild_blog_tag_id, @guild.guild_blog_tags.map{ |tag| [tag.name, tag.id] }, { include_blank: '選択なし'}, class: 'form-controller' %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.label :name, '新規ブログタグ' %>
+    <%= form.text_field :name, class: 'form-controller' %>
+  </div>
+  
+  <div class="field form-group">
+    <%= form.label :content %>
+    <%= form.rich_text_area :content, class: 'form-controller' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

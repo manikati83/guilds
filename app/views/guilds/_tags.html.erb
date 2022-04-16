@@ -1,0 +1,18 @@
+<ul>
+  <% @blog_tags.each do |tag| %>
+    <li class="parent" onclick="func1(this)"><%= tag.name %>▽
+      <ul>
+        <% tag.blogs.each do |blog| %>
+          <li><%= link_to blog.title, blog_path(blog) %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+
+<script>
+    function func1(e) {
+      e.classList.toggle("active");
+    }
+</script>
