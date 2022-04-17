@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   root to: 'toppages#index'
   
   get 'login', to: 'sessions#new'
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   
   get 'search', to: 'guilds#search'
   get 'tags', to: 'guilds#tags'
+  
   resources :guilds do
     member do
       get :blogs
@@ -21,4 +23,5 @@ Rails.application.routes.draw do
   resources :guild_members
   resources :blogs
   resources :approvals
+  resources :messages
 end

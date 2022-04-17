@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :approvals, dependent: :destroy
   has_many :approval_guilds, through: :approvals, source: :guild
   
+  has_many :messages
+  
   
   def login_at(user)
     result = (Time.zone.now - user.online_at).floor / 60

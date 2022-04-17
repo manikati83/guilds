@@ -17,6 +17,8 @@ class Guild < ApplicationRecord
   has_many :approvals, dependent: :destroy
   has_many :approval_users, through: :approvals
   
+  has_many :messages
+  
   
   after_create do
     guild = Guild.find_by(id: id)

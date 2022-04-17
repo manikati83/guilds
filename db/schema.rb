@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_14_122628) do
+ActiveRecord::Schema.define(version: 2022_04_16_083119) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 2022_04_14_122628) do
     t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.text "message"
+    t.bigint "user_id", null: false
+    t.bigint "guild_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guild_id"], name: "index_messages_on_guild_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -136,4 +146,6 @@ ActiveRecord::Schema.define(version: 2022_04_14_122628) do
   add_foreign_key "guild_members", "guilds"
   add_foreign_key "guild_members", "users"
   add_foreign_key "guilds", "users"
+  add_foreign_key "messages", "guilds"
+  add_foreign_key "messages", "users"
 end

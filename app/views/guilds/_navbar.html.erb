@@ -7,7 +7,7 @@
       <li><%= link_to 'ギルドギャラリー', root_path, class: 'menu' %></li>
       <% if @guild.members.include?(current_user) %>
         <li><%= link_to '依頼', root_path, class: 'menu' %></li>
-        <li><%= link_to 'ギルドチャット', root_path, class: 'menu' %></li>
+        <li><%= link_to 'ギルドチャット', new_message_path(id: @guild.id), class: 'menu' %></li>
       <% else %>
         <% if @guild.guild_type %>
           <!-- 依頼ありギルド !-->

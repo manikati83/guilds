@@ -1,0 +1,16 @@
+<div>
+  <%= render 'guilds/navbar' %>
+</div>
+<h1><%= @guild.name %>：チャットルーム</h1>
+
+<div id="message-area">
+  <% if @messages %>
+    <%= render 'guilds/messages', messages: @messages %>
+  <% end %>
+</div>
+
+<%= form_with(model: @new_message) do |f| %>
+  <%= hidden_field_tag :guild_id, @guild.id %>
+  <%= f.text_field :message %>
+  <%= f.submit '送信', class: 'btn btn-primary' %>
+<% end %>

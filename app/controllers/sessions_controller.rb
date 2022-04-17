@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     email = params[:session][:email].downcase
     password = params[:session][:password]
     if login(email, password)
-      current_user.update_attributes(online: true, online_at: DateTime.now)
+      cookies.signed[:user_id] = current_user.id
       flash[:success] = 'ログインに成功しました。'
       redirect_to @user
     else
@@ -16,8 +16,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.update_attributes(online: false, online_at: DateTime.now)
     session[:user_id] = nil
+    cookies.signed[:user_id] = nil
     flash[:success] = 'ログアウトしました。'
     redirect_to root_url
   end
