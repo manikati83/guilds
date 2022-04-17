@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-.message{
+#message{
   background-color: #d7ccc8;
   overflow: auto; 
   width: 100%; 
@@ -16,17 +16,17 @@
   font-size: 14px;
 }
 
-.message::-webkit-scrollbar {
+#message::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-.message::-webkit-scrollbar-thumb {
+#message::-webkit-scrollbar-thumb {
   background: #ff9802;
   border-radius: 5px;
 }
 
-.message::-webkit-scrollbar-track {
+#message::-webkit-scrollbar-track {
   background: #ffcc80;
   border-radius: 5px;
 }

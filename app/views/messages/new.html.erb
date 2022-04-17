@@ -14,3 +14,10 @@
   <%= f.text_field :message %>
   <%= f.submit '送信', class: 'btn btn-primary' %>
 <% end %>
+
+
+<script>
+  var list;
+  list = document.getElementById('message');
+  list.scrollTo(0, list.scrollHeight);
+</script>
