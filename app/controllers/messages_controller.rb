@@ -12,8 +12,8 @@ class MessagesController < ApplicationController
     @new_message = current_user.messages.build
     if @guild.members.include?(current_user)
       @message.save
-      #ActionCable.server.broadcast 'guild_channel', message: @message.message
-      GuildChannel.broadcast_to(@guild, message: @message.message)
+      params[:room] = "Best Room"
+      ActionCable.server.broadcast "guild_#{params[:guild]}", message: @message.message
     end
   end
 
