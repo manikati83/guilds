@@ -1,6 +1,15 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create({ channel: "GuildChannel", room: "Best Room"}, {
+document.addEventListener("turbolinks:load", () => {
+const data = document.getElementById("data")
+if (data === null) {
+  return
+}
+const channel = "GuildChannel"
+const guild_id = data.getAttribute("data-guild-id")
+
+if (!isSubscribed(channel, guild_id)) {
+consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
   connected() {
     // Called when the subscription is ready for use on the server
   },
@@ -22,3 +31,12 @@ consumer.subscriptions.create({ channel: "GuildChannel", room: "Best Room"}, {
   speak: function() {
   }
 });
+}
+})
+
+
+const isSubscribed = (channel, guild_id) => {
+  const identifier = `{"channel":"${channel}","guild_id":"${guild_id}"}`
+  const subscription = consumer.subscriptions.findAll(identifier)
+  return !!subscription.length
+}
