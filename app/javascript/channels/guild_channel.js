@@ -19,6 +19,11 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
   },
 
   received(data) {
+    const now_data = document.getElementById("data")
+    if (now_data === null) {
+      return
+    }
+    const guild_id = now_data.getAttribute("data-guild-id")
     // Called when there's incoming data on the websocket for this channel
     /*global $*/
     if (guild_id == data['guild_id']) {
