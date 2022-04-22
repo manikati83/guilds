@@ -1,7 +1,5 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("GuildChannel")
-
 document.addEventListener("turbolinks:load", () => {
   const data = document.getElementById("data")
   if (data === null) {
