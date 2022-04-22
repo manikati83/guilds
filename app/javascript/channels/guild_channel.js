@@ -21,11 +21,13 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     /*global $*/
-    $('#message').append("<p>" + data['message'] + "</p>");
-    
-    var list;
-    list = document.getElementById('message');
-    list.scrollTo(0, list.scrollHeight);
+    if (guild_id == data['guild_id']) {
+      $('#message').append("<p>" + data['message'] + "</p>");
+      
+      var list;
+      list = document.getElementById('message');
+      list.scrollTo(0, list.scrollHeight);
+    }
   },
 
   speak: function() {

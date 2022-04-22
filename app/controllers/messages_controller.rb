@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     if @guild.members.include?(current_user)
       @message.save
       params[:room] = "Best Room"
-      ActionCable.server.broadcast "guild_#{params[:guild_id]}", message: @message.message
+      ActionCable.server.broadcast "guild_#{params[:guild_id]}", message: @message.message, guild_id: @guild.id
     end
   end
 
