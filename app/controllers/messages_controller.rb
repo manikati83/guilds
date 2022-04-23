@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     if @guild.members.include?(current_user)
       @message.save
       # ActionCable.server.broadcast "guild_#{params[:guild_id]}", message: @message.message, guild_id: @guild.id
-      GuildChannel.broadcast_to(@guild, message: @message.message)
+      GuildChannel.broadcast_to(@guild, message: @message.message, guild_id: @guild.id)
     end
   end
 

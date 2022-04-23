@@ -1,5 +1,7 @@
 import consumer from "./consumer"
 
+consumer.subscriptions.create("GuildChannel")
+
 document.addEventListener("turbolinks:load", () => {
 const data = document.getElementById("data")
 if (data === null) {
@@ -26,13 +28,13 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
     const guild_id = now_data.getAttribute("data-guild-id")
     // Called when there's incoming data on the websocket for this channel
     /*global $*/
-    //if (guild_id == data['guild_id']) {
+    if (guild_id == data['guild_id']) {
       $('#message').append("<p>" + data['message'] + "</p>");
       
       var list;
       list = document.getElementById('message');
       list.scrollTo(0, list.scrollHeight);
-    //}
+    }
   },
 
   speak: function() {

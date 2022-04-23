@@ -2,10 +2,11 @@ class GuildChannel < ApplicationCable::Channel
   def subscribed
     # stream_from "some_channel"
     # stream_from "guild_#{params[:guild_id]}"
-    @guild = current_user.join_guilds.find_by(id: params[:guild_id])
-    reject if @guild.nil?
-    stream_for(@guild)  
+    stream_from "guild_channel_global"
     current_user.update_attributes(online: true, online_at: DateTime.now)
+    @guild = current_user.join_guilds.find_by(id: params[:guild_id])
+    #reject if @guild.nil?
+    stream_for(@guild)  
   end
 
   def unsubscribed
