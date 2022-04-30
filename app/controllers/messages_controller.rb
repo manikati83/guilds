@@ -10,10 +10,11 @@ class MessagesController < ApplicationController
     @message = current_user.messages.build(message_params)
     @message.guild_id = @guild.id
     @new_message = current_user.messages.build
+    address = Digest::MD5::hexdigest(current_user.email.downcase)
     if @guild.members.include?(current_user)
       @message.save
       # ActionCable.server.broadcast "guild_#{params[:guild_id]}", message: @message.message, guild_id: @guild.id
-      GuildChannel.broadcast_to(@guild, message: @message.message, guild_id: @guild.id)
+      GuildChannel.broadcast_to(@guild, message: @message.message, guild_id: @guild.id, address: address, name: current_user.name)
     end
   end
 

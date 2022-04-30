@@ -11,6 +11,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find(params[:id])
     @guild = @blog.guild
+    @blog_tags = @guild.guild_blog_tags.all
   end
 
   # GET /blogs/new

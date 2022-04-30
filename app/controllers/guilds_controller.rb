@@ -9,8 +9,8 @@ class GuildsController < ApplicationController
   
   def show
     @guild = Guild.find(params[:id])
-    @guild.image = 'top.jpg'
     @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
+    @blogs = @guild.blogs.order(id: :desc).limit(10)
   end
   
   def new
@@ -31,9 +31,18 @@ class GuildsController < ApplicationController
   end
   
   def edit
+    @guild = Guild.find(params[:id])
   end
   
   def update
+    @guild = Guild.find(params[:id])
+    if @guild.update(guild_params)
+      flash[:success] = "ギルド情報を更新しました。"
+      redirect_to @guild
+    else
+      flash.now[:danger] = "ギルド情報を更新できませんでした。"
+      render :edit
+    end
   end
   
   def destroy
@@ -78,7 +87,7 @@ class GuildsController < ApplicationController
   end
   
   def guild_params
-    params.require(:guild).permit(:name, :content, :guild_type, :join_type, :limit_member, :hashbody, hashtag_ids: [])
+    params.require(:guild).permit(:name, :content, :guild_type, :join_type, :limit_member, :image, :hashbody, hashtag_ids: [])
   end
   
 

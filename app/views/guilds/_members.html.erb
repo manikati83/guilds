@@ -1,0 +1,9 @@
+<ul id="member-list">
+  <% @guild.members.each do |member| %>
+    <% if member.online %>
+      <li class="member online mt-3" onclick="func1(this)"><span class="online-lamp">・</span><img class="rounded" src="<%= gravatar_url(member, { size: 25 }) %>" alt="">&nbsp;<span class="user-name"><%= member.name %></span></li>
+    <% else %>
+      <li class="member mt-3" onclick="func1(this)"><span class="offline-lamp">・</span><img class="rounded" src="<%= gravatar_url(member, { size: 25 }) %>" alt="">&nbsp;<span class="user-name"><%= member.name %></span></li>
+    <% end %>
+  <% end %>
+</ul>

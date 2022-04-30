@@ -1,9 +1,9 @@
-<ul>
+<ul id="tag-list">
   <% @blog_tags.each do |tag| %>
-    <li class="parent" onclick="func1(this)"><%= tag.name %>▽
+    <li class="parent" onclick="func1(this)"><%= tag.name %>&nbsp;<i class="fa fa-chevron-down fa-xs"></i>
       <ul>
         <% tag.blogs.each do |blog| %>
-          <li><%= link_to blog.title, blog_path(blog) %></li>
+          <li><%= link_to blog.title, blog_path(blog), 'data-turbolinks': false %></li>
         <% end %>
       </ul>
     </li>

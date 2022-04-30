@@ -29,7 +29,10 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
     // Called when there's incoming data on the websocket for this channel
     /*global $*/
     if (guild_id == data['guild_id']) {
-      $('#message').append("<p>" + data['message'] + "</p>");
+      const sentence = '<div class="media"><div class="media-body">\
+      <h5><img class="rounded" src="https://secure.gravatar.com/avatar/' + data["address"] + '?s=30&d=mp" alt="">&nbsp;' + data["name"] + '</h5>\
+      <p>' + data["message"] + '</p></div></div>'
+      $('#message').append(sentence);
       
       var list;
       list = document.getElementById('message');

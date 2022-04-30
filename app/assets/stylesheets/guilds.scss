@@ -2,10 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.master-icon{
+  color: #FFCC33;
+}
+
 
 /* _navbar */
 .menu-bar{
   background-color: #333;
+}
+
+.menu-bar a{
+  text-decoration: none;
+  color: #FFF;
+}
+
+.guildpage-name{
+  font-size: 2em;
+  margin-left: 50px;
 }
 
 #nav {
@@ -41,6 +55,11 @@
   white-space: nowrap;
 }
 
+.nav-icon{
+  color: #FFF;
+  
+}
+
 
 
 
@@ -60,8 +79,10 @@
   padding: 15px;
 }
 
-.media h3{
-  font-size: 1.5em;
+.media a{
+  font-size: 1em;
+  color: #666;
+  text-decoration: none;
 }
 
 .media:hover .guild-name{
@@ -78,6 +99,8 @@
   display: inline-block;
   font-size: 1.2em;
 }
+
+
 
 /* guilds/search */
 #search{
@@ -101,7 +124,7 @@
 
 #guild-img{
   width: 100%;
-  height: 300px;
+  height: 400px;
 }
 
 @media screen and (max-width:600px){
@@ -111,19 +134,139 @@
   }
 }
 
-.guild-master{
-  text-align: center;
+.guild-info{
+  padding-top: 30px;
+  border-bottom: 2px solid;
+  border-color: #222;
+  background-color: #3e3d3d;
+}
+
+@media screen and (max-width:750px) {
+  #guild-status{
+    margin: 10px 30px 30px 30px;
+    color: #EEE;
+  }
+}
+
+@media screen and (min-width:751px) {
+  #guild-status{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 100px;
+    color: #EEE;
+  }
+}
+
+
+.guild-status{
+  background-color: #999;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#guild-content{
+  color: #EEE;
   margin: 30px;
 }
 
-.guild_content{
-  margin: 30px;
+.guild-content{
+  height: 200px;
+  background-color: #999;
+  border-radius: 10px;
+  padding: 20px;
 }
 
+
+
+#top-bloglist{
+  padding: 10px 50px;
+  background-color: #3e3d3d;
+  border-bottom: 2px solid;
+  border-color: #222;
+  color: #FFF;
+}
+
+.box{
+  display: flex;
+  width: 100%;
+  height: 280px;
+  overflow-x: scroll;
+}
+
+.box::-webkit-scrollbar {
+  height: 14px; /* スクロールバーの高さ */
+}
+ 
+.box::-webkit-scrollbar-thumb {
+  background: #d2b48c; /* ツマミの色 */
+  border-radius: 7px; /* ツマミ両端の丸み */
+}
+ 
+.box::-webkit-scrollbar-track {
+  background: #f5deb3; /* トラックの色 */
+  border-radius: 7px; /* トラック両端の丸み */
+}
+
+.boxlist-blog{
+  width: 250px;
+  margin: 5px;
+  background-color: #999;
+  flex-shrink: 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.boxlist-title h4{
+  font-size: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #FFF;
+  margin-bottom: 10px;
+}
+
+.boxlist-title a{
+  color: #FFF;
+}
+
+.boxlist-content p{
+  font-size: 1em;
+  color: #DDD;
+}
+
+.user-icon{
+  border-radius: 50px;
+}
+
+
+#top-memberlist{
+  padding: 10px 50px;
+  background-color: #3e3d3d;
+  color: #FFF;
+}
+
+#top-memberlist .media{
+  background-color: #999;
+  border-radius: 10px;
+  margin: 20px auto;
+}
+
+#top-memberlist .media h3{
+  color: #FFF;
+}
+
+#top-memberlist .media p{
+  color: #DDD;
+}
+
+#top-memberlist .media .online{
+  color: #66FF33;
+}
 
 /* guild/blog */
 .parent{
   font-size: 1.3em;
+  padding-top: 30px;
 }
 .parent ul{
   display: none;
@@ -135,3 +278,169 @@
 .active ul {
   display: block;
 }
+
+.blog-menu{
+  margin: auto;
+}
+
+
+.wrap{
+  min-height: 100vh;
+}
+
+.main{
+  margin: 0 30px;
+}
+
+@media screen and (max-width:750px) {
+  #tag-list a{
+    color: #FFF;
+  }
+  
+  /*スライドメニュー　*/
+  #menu {
+    position: fixed;
+    height: 70%;                         /* メニューの縦範囲 */
+    width: 350px;                         /* メニューの横範囲 */
+    max-width: 350px;                     /* メニューの横上限 */
+    background-color: #333;            /* メニューの背景色 */
+    top: 250px;                            /* メニューの表示位置縦 */
+    left: 0;                             /* メニューの表示位置横 */
+    z-index: 10;                          /* メニューの重なり位置 */
+    overflow: auto; 
+  }
+  
+  #menu::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  #menu::-webkit-scrollbar-thumb {
+    background: #ff9802;
+    border-radius: 5px;
+  }
+  
+  #menu::-webkit-scrollbar-track {
+    background: #ffcc80;
+    border-radius: 5px;
+  }
+  
+  #menu li {
+    padding: 12px;                        /* 余白 */
+    color: #EEEEEE;                       /* 文字色 */
+    border-bottom: 1px solid #EEEEEE;     /* 区切線 */
+    list-style-type: none;                /* リストデザイン無 */
+  }
+  
+  /*====== 右に消えるアニメ ======*/
+  #menu.SlideOut {
+  animation: SlideOut 0.5s forwards;
+  }
+  @keyframes SlideOut{
+    from {
+    transform: translateX(0px);
+    }
+    to {
+    transform: translateX(-350px);
+    }
+  }
+  
+  /*====== 左に現れるアニメ ======*/
+  #menu.SlideIN {
+  animation: SlideIN 0.5s forwards;
+  }
+  @keyframes SlideIN{
+    from {
+    transform: translateX(-350px);
+    }
+    to {
+    transform: translateX(0px);
+    }
+  }
+  
+  /*=== ヘッダーデザイン ===*/
+  #header{
+    /*レイアウトCSS*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width:100%;
+    z-index: 5;
+    
+    /*レイアウトCSS*/
+    display: flex;
+    align-items: center;
+    background:#333;
+    color:#fff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* ハンバーガーボタン */
+  #menu_btn .openbtn {
+            /* 固定表示 */
+             /* 背景色 */
+    cursor: pointer;            /* マウスカーソル指 */
+    width: 100px;                /* 高さ */
+    height:60px;                /* 横幅 */
+    border-radius: 5px;         /* 角を丸める */
+                /* 表示位置上 */
+  }
+  
+  
+  /* span (1)番目の要素に適用 */
+  .openbtn span:nth-of-type(1) {
+      top:15px;
+  }
+  
+  /* span (2)番目の要素に適用 */
+  .openbtn span:nth-of-type(2) {
+      top:23px;
+  }
+  
+  /* span (3)番目の要素に適用 */
+  .openbtn span:nth-of-type(3) {
+      top:31px;
+  }
+  
+  /*=== コンテンツの開始位置 ===*/
+  main {
+        padding-top: 100px;
+  }
+}
+
+@media screen and (min-width:751px) {
+  #menu_btn{
+    display: none;
+  }
+  .side-menu{
+    padding: 0 auto;
+    min-height: 100vh;
+    background-color: #333;
+  }
+  
+  .side-menu ul{
+    list-style: none;
+  }
+  
+  .side-menu li{
+    color: #CCCCFF;
+  }
+  
+  .side-menu li:hover{
+    color: #FFF;
+  }
+  
+  .side-menu a{
+    color: #CCCCFF;
+    text-decoration: none;
+  }
+  
+  .side-menu li a:hover{
+    color: #FFF;
+  }  
+}
+
+
+

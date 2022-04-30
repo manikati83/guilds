@@ -1,40 +1,55 @@
-<div>
-  <%= render 'guilds/navbar' %>
-</div>
 <div id="img-box">
   <% if !@guild.image.nil? %>
-    <%= image_tag @guild.image, id: 'guild-img' %>
+    <%= image_tag @guild.image.url, id: 'guild-img' %>
   <% end %>
 </div>
 
-<div class="container">
-<div class="row">
-  <div class="co-md-4 guild-master">
-    <h4>ギルドマスター</h4>
-    <div class="card">
-      <img class="rounded" src="<%= gravatar_url(@guild.user, { size: 150 }) %>" alt="">
-      <%= link_to @guild.user.name, user_path(id: @guild.user.id) %>
+<%= render 'guilds/navbar' %>
+
+<div class="guild-info">
+  <div class="row">
+    <div id="guild-status" class="col-md-4">
+      <div class="guild-status">
+        <p>ギルドマスター&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= @guild.user.name %></p>
+        <p>ギルド設立日&nbsp;:&nbsp;<%= @guild.created_at %></p>
+        <p>いいね</p>
+        <p>お気に入り</p>
+      </div>
+    </div>
+    <div id="guild-content" class="col-md-7">
+      <div class="guild-content">
+        <p><%= safe_join(@guild.content.split("\n"),tag(:br)) %></p>
+      </div>
     </div>
   </div>
-  <div class="col-md-8 guild_content">
-    <h3>ギルド紹介</h3>
-    <div>
-      <p><%= safe_join(@guild.content.split("\n"),tag(:br)) %></p>
-    </div>
-  </div>
-</div>
 </div>
 
-<div class="container">
+<div id="top-bloglist">
+  <h3>ギルドブログ</h3>
+  <div class="box">
+    <% @blogs.each do |blog| %>
+      <div class="boxlist-blog">
+        <div class="boxlist-title">
+          <h4><%= link_to blog.title, blog_path(id: blog.id), class: 'guild-name', 'data-turbolinks': false %></h4>
+        </div>
+        <div class="boxlist-content">
+          <p><%= strip_tags(blog.content.to_s).gsub(/[\n]/,"").strip.truncate(80) %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="top-memberlist">
   <h3>ギルドメンバー</h3>
     <% @members.each do |member| %>
-      <div class="media bg-light rounded">
+      <div class="media">
         <div class="media-body">
-          <h3><%= link_to member.user.name, user_path(id: member.user.id), class: 'guild-name' %></h3>
+          <h3><img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 50 }) %>" alt="">&nbsp;<%= link_to member.user.name, user_path(id: member.user.id), class: 'guild-name' %></h3>
           <% if member.user.online %>
-            <p class="text-success">オンライン</p>
+            <p class="online">オンライン</p>
           <% else %>
-            <p class="text-dark">オフライン</p>
+            <p>オフライン</p>
           <% end %>
           <p>ログイン履歴：<%= member.user.login_at(member.user) %>分前</p>
         </div>

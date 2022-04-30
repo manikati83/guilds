@@ -1,17 +1,58 @@
 <%= render 'guilds/navbar' %>
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @blog.title %>
-  
-  <% if @blog.guild_blog_tag %>
-    <strong>blog tag:</strong>
-    <%= @blog.guild_blog_tag.name %>
-  <% end %>
-  
-  <%= @blog.content %>
-</p>
+<div class="wrap">
+  <div class="row">
+    <div class="col-md-8 order-md-2 main">
+      <p id="notice"><%= notice %></p>
+      
+      <div id="menu_btn" class="openbtn border">
+          <i class="fa fa-list fa-2x"></i>&nbsp;<h5>Blog List</h5>
+      </div>
+      
+      <div class="build-btn">
+        <h3><%= link_to 'ブログ作成', new_blog_path(guild_id: @guild.id), class: 'btn btn-success' %></h3>
+      </div>
+      
+      <div class="blog-wrap bg-white p-3 rounded">
+        <div class="blog-header p-3 border-bottom">
+          <h3><%= @blog.title %></h3>
+          <% if @blog.guild_blog_tag %>
+            <strong>タグ:</strong>
+            <%= @blog.guild_blog_tag.name %>
+          <% end %>
+        </div>
+        <div class="blog-content mt-5">
+          <p><%= @blog.content %></p>
+        </div>
+      </div>
+      
+      <%= link_to 'Edit', edit_blog_path(@blog) %> |
+      <%= link_to 'Back', blogs_guild_path(id: @blog.guild.id), 'data-turbolinks': false %>
+      
+    </div>
+    <div id="menu" class="col-md-3 order-md-1 side-menu pt-5 SlideOut">
+      <%= render 'guilds/tags' %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_guild_path(id: @blog.guild.id) %>
+
+
+<script>
+    $('#menu_btn').on('click', function(){
+      SlideMenu()
+    });
+    
+    // スライドメニュー関数
+    const SlideMenu = () => {
+      if($('#menu').hasClass("SlideOut")){
+        // スライドメニューが非表示なら表示
+        $('#menu').removeClass('SlideOut');
+        $('#menu').addClass('SlideIN');
+      } else {
+        // スライドメニューがあれば非表示
+        $('#menu').removeClass('SlideIN');
+        $('#menu').addClass('SlideOut');
+      }
+    }
+</script>

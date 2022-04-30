@@ -2,6 +2,7 @@ class Guild < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :content, length: { maximum: 2000 }
   validates :limit_member, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 99}
+  mount_uploader :image, ImageUploader
   
   belongs_to :user
   
@@ -31,7 +32,7 @@ class Guild < ApplicationRecord
   
   before_update do
     guild = Guild.find_by(id: id)
-    topic.hashtags.clear
+    guild.hashtags.clear
     hashtags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     hashtags.uniq.map do |hashtag|
       tag = Hashtag.find_or_create_by(hashname: hashtag.downcase.delete('#'))

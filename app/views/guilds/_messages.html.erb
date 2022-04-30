@@ -1,5 +1,10 @@
 <div id="message">
   <% messages.each do |message| %>
-    <p><%= message.message %></p>
+    <div class="media border-bottom">
+      <div class="media-body">
+        <h5><img class="rounded" src="<%= gravatar_url(message.user, { size: 30 }) %>" alt="">&nbsp;<%= message.user.name %></h5>
+        <p><%= message.message %></p>
+      </div>
+    </div>
   <% end %>
 </div>

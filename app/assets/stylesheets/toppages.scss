@@ -3,6 +3,12 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .top-group{
   background-color: #616161;
+  background-image: image_url("topimage.jpg");
+  background-size: 80% 100%;
+  background-size: cover;
+  background-position: right 10% bottom 50%;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
 }
 
 .row{
@@ -13,7 +19,7 @@
   padding-top: 80px;
   margin-bottom: 30px;
   color: #FFF;
-  font-size: 50px;
+  font-size: 40px;
   text-align: center;
 }
 
@@ -27,4 +33,17 @@
   background-color: #A1887F;
   color: #FFF;
   margin-bottom: 50px;
+}
+
+.explanation{
+  margin-top: 100px;
+}
+
+.explanation h3{
+  text-align: center;
+  font-size: 40px;
+}
+
+.explanation h4{
+  font-size: 1.3em;
 }

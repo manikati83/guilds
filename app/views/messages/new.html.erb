@@ -1,25 +1,57 @@
 <div>
   <%= render 'guilds/navbar' %>
 </div>
-<h1><%= @guild.name %>：チャットルーム</h1>
+
 <div id="data" data-guild-id="<%= @guild.id %>" data-user-id="<%= current_user.id %>"></div>
 
-
-<div id="message-area">
-  <% if @messages %>
-    <%= render 'guilds/messages', messages: @messages %>
-  <% end %>
+<div id="member_btn" class="openbtn">
+    <i class="fa fa-list fa-2x"></i>&nbsp;<h5>Member List</h5>
 </div>
 
-<%= form_with(model: @new_message) do |f| %>
-  <%= hidden_field_tag :guild_id, @guild.id %>
-  <%= f.text_field :message %>
-  <%= f.submit '送信', class: 'btn btn-primary' %>
-<% end %>
+<div class="row">
+  <div id ="member-menu" class="col-md-2 members side-menu pt-5 SlideOut">
+    <%= render 'guilds/members' %>
+  </div>
+  
+  <div class="col-md-10">
+    <div id="message-area">
+      <% if @messages %>
+        <%= render 'guilds/messages', messages: @messages %>
+      <% end %>
+    </div>
+    
+    <%= form_with(model: @new_message) do |f| %>
+      <%= hidden_field_tag :guild_id, @guild.id %>
+      <div class="form-group">
+         <%= f.text_field :message, class: 'form-control' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
 
 
 <script>
   var list;
   list = document.getElementById('message');
   list.scrollTo(0, list.scrollHeight);
+  
+  
+  $('#member_btn').on('click', function(){
+    SlideMenu()
+  });
+  
+  // スライドメニュー関数
+  const SlideMenu = () => {
+    if($('#member-menu').hasClass("SlideOut")){
+      // スライドメニューが非表示なら表示
+      $('#member-menu').removeClass('SlideOut');
+      $('#member-menu').addClass('SlideIN');
+    } else {
+      // スライドメニューがあれば非表示
+      $('#member-menu').removeClass('SlideIN');
+      $('#member-menu').addClass('SlideOut');
+    }
+  }
 </script>

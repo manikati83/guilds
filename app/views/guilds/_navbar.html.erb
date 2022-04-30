@@ -1,13 +1,16 @@
 <div class="menu-bar">
-  <h1 class="text-white"><%= link_to @guild.name, guild_path(id: @guild.id) %></h1>
+  <h1 class="guildpage-name"><%= link_to @guild.name, guild_path(id: @guild.id) %></h1>
   <nav id="nav">
     <ul>
-      <li><%= link_to 'ギルドメンバー', members_guild_path(id: @guild.id), class: 'menu' %></li>
-      <li><%= link_to 'ギルドブログ', blogs_guild_path(id: @guild.id), class: 'menu' %></li>
-      <li><%= link_to 'ギルドギャラリー', root_path, class: 'menu' %></li>
+      <li><i class="fa fa-users fa-lg nav-icon"></i>&nbsp;<%= link_to 'member', members_guild_path(id: @guild.id), class: 'menu' %></li>
+      <li><i class="fa fa-pen fa-lg nav-icon"></i>&nbsp;<%= link_to 'blog', blogs_guild_path(id: @guild.id), class: 'menu', 'data-turbolinks': false %></li>
+      <li><i class="fa fa-image fa-lg nav-icon"></i>&nbsp;<%= link_to 'gallery', root_path, class: 'menu' %></li>
       <% if @guild.members.include?(current_user) %>
-        <li><%= link_to '依頼', root_path, class: 'menu' %></li>
-        <li><%= link_to 'ギルドチャット', new_message_path(id: @guild.id), class: 'menu' %></li>
+        <li><i class="fa fa-scroll fa-lg nav-icon"></i>&nbsp;<%= link_to 'quest', root_path, class: 'menu' %></li>
+        <li><i class="fa fa-comments fa-lg nav-icon"></i>&nbsp;<%= link_to 'chat', new_message_path(id: @guild.id), class: 'menu', 'data-turbolinks': false %></li>
+        <% if @guild.user_id == current_user.id %>
+          <li><i class="fa fa-wrench fa-lg nav-icon"></i>&nbsp;<%= link_to 'setting', edit_guild_path(id: @guild.id), class: 'menu' %></li>
+        <% end %>
       <% else %>
         <% if @guild.join_type %>
           <!-- 依頼ありギルド !-->
@@ -19,7 +22,7 @@
           <%= form_with(model: current_user.guild_members.build, local: true) do |f| %>
             <%= hidden_field_tag :guild_id, @guild.id %>
             <%= hidden_field_tag :user_id, current_user.id %>
-            <%= f.submit '加入する', class: 'btn btn-primary btn-block' %>
+            <%= f.submit '更新する', class: 'btn btn-primary btn-block' %>
           <% end %>
         <% end %>
       <% end %>
