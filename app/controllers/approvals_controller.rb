@@ -8,14 +8,19 @@ class ApprovalsController < ApplicationController
 
   def create
     @guild = Guild.find(params[:guild_id])
-    approval = current_user.approvals.build(approval_params)
-    approval.guild_id = @guild.id
-    if approval.save
-      flash[:success] = '加入申請を送りました。'
+    if @guild.approval_user?(current_user)
+      flash[:success] = 'すでに申請しています。'
       redirect_to @guild
     else
-      flash.now[:danger] = '加入申請を送れませんでした。'
-      render :new
+      approval = current_user.approvals.build(approval_params)
+      approval.guild_id = @guild.id
+      if approval.save
+        flash[:success] = '加入申請を送りました。'
+        redirect_to @guild
+      else
+        flash.now[:danger] = '加入申請を送れませんでした。'
+        render :new
+      end
     end
   end 
 

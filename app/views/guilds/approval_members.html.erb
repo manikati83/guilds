@@ -12,7 +12,7 @@
       <div class="media bg-light rounded">
         <div class="media-body">
           <h3><%= link_to approval.user.name, user_path(id: approval.user.id), class: 'guild-name' %></h3>
-          <p>ログイン履歴：<%= approval.user.login_at(approval.user) %>分前</p>
+          <p>ログイン履歴：<%= approval.user.how_long_ago %></p>
           <%= form_with(model: @guild.guild_members.build, local: true) do |f| %>
             <%= hidden_field_tag :guild_id, @guild.id %>
             <%= hidden_field_tag :user_id, approval.user.id %>

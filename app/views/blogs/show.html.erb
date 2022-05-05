@@ -13,20 +13,34 @@
         <h3><%= link_to 'ブログ作成', new_blog_path(guild_id: @guild.id), class: 'btn btn-success' %></h3>
       </div>
       
-      <div class="blog-wrap bg-white p-3 rounded">
+      <div class="blog-show-wrap">
         <div class="blog-header p-3 border-bottom">
+          <% if @blog.user.id == current_user.id %>
+            <div class="dropdown">
+              <button class="dropdown__btn" id="dropdown__btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="64"/><circle cx="256" cy="448" r="64"/><circle cx="256" cy="64" r="64"/></svg>
+              </button>
+              <div class="dropdown__body">
+                <ul class="dropdown__list">
+                  <li class="dropdown__item"><%= link_to '編集', edit_blog_path(@blog, guild_id: @blog.guild.id), class: 'dropdown__item-link' %></li>
+                  <li class="dropdown__item"><%= link_to '削除', @blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown__item-link' %></li>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+          <p class="mb-0">投稿者&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= @blog.user.name %></p>
+          <p>投稿日&nbsp;:&nbsp;<%= @blog.created_at %></p>
           <h3><%= @blog.title %></h3>
           <% if @blog.guild_blog_tag %>
             <strong>タグ:</strong>
             <%= @blog.guild_blog_tag.name %>
           <% end %>
         </div>
-        <div class="blog-content mt-5">
+        <div class="blog-show-content mt-5">
           <p><%= @blog.content %></p>
         </div>
       </div>
       
-      <%= link_to 'Edit', edit_blog_path(@blog) %> |
       <%= link_to 'Back', blogs_guild_path(id: @blog.guild.id), 'data-turbolinks': false %>
       
     </div>
@@ -55,4 +69,16 @@
         $('#menu').addClass('SlideOut');
       }
     }
+    
+    
+    (function () {
+      document.addEventListener('DOMContentLoaded', function() { // HTML解析が終わったら
+        const btn = document.getElementById('dropdown__btn'); // ボタンをidで取得
+        if(btn) { // ボタンが存在しないときにエラーになるのを回避
+          btn.addEventListener('click', function(){ //ボタンがクリックされたら
+            this.classList.toggle('is-open'); // is-openを付加する
+          });
+        }
+      });
+    }());
 </script>

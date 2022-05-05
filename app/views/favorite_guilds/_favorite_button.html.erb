@@ -1,0 +1,11 @@
+<% if current_user.favorite?(guild) %>
+  <%= form_with(model: current_user.favorite_guilds.find_by(guild_id: guild.id), local: true, method: :delete) do |f| %>
+    <%= hidden_field_tag :guild_id, guild.id %>
+    <%= f.submit 'お気に入り登録済み', class: 'btn btn-secondary' %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.favorite_guilds.build, local: true) do |f| %>
+    <%= hidden_field_tag :guild_id, guild.id %>
+    <%= f.submit 'お気に入り登録', class: 'btn btn-success' %>
+  <% end %>
+<% end %>

@@ -1,5 +1,6 @@
-class Message < ApplicationRecord
-  belongs_to :user
+class GuildNews < ApplicationRecord
+  validates :content, presence: true, length: { maximum: 1000 }
+  
   belongs_to :guild
   
   def how_long_ago

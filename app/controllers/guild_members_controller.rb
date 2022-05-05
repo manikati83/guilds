@@ -4,13 +4,18 @@ class GuildMembersController < ApplicationController
   def create
     @guild = Guild.find(params[:guild_id])
     @user = User.find(params[:user_id])
-    @guild.add_member(@user)
-    if current_user == @user
-      flash[:success] = @guild.name + 'に加入しました。'
-      redirect_to @guild
+    if @guild.members.count >= @guild.limit_member
+      flash[:danger] = '加入人数が上限に達しています。'
+      redirect_back(fallback_location: approval_members_guild_path(id: @guild.id))
     else
-      flash[:success] = @user.name + 'さんが加入しました。'
-      redirect_to @guild
+      @guild.add_member(@user)
+      if current_user == @user
+        flash[:success] = @guild.name + 'に加入しました。'
+        redirect_to @guild
+      else
+        flash[:success] = @user.name + 'さんが加入しました。'
+        redirect_to @guild
+      end
     end
   end
 

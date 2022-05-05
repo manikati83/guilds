@@ -18,9 +18,36 @@ class User < ApplicationRecord
   
   has_many :messages
   
+  has_many :favorite_guilds, dependent: :destroy
+  has_many :favorites, through: :favorite_guilds, source: :guild
   
-  def login_at(user)
-    result = (Time.zone.now - user.online_at).floor / 60
-    return result
+  
+  def favorite(guild)
+    self.favorite_guilds.find_or_create_by(guild_id: guild.id)
+  end
+  
+  def unfavorite(guild)
+    favorite_guild = self.favorite_guilds.find_by(guild_id: guild.id)
+    favorite_guild.destroy if favorite_guild
+  end
+  
+  def favorite?(guild)
+    self.favorites.include?(guild)
+  end
+  
+  def how_long_ago
+    if (Time.now - self.online_at) <= 60 * 60
+      # 60分以内なら
+      ((Time.now - self.online_at) / 60).to_i.to_s + "分前"
+    elsif (Time.now - self.online_at) <= 60 * 60 * 24
+      # 24時間以内なら
+      ((Time.now - self.online_at) / 3600).to_i.to_s + "時間前"
+    elsif (Date.today - self.online_at.to_date) <= 30
+      # 30日以内なら
+      (Date.today - self.online_at.to_date).to_i.to_s + "日前"
+    else
+      #　それ以降
+      self.online_at
+    end
   end
 end

@@ -1,3 +1,119 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.user-page-icon{
+  border-radius: 80px;
+}
+
+.user-page-left-profile{
+  margin: 80px 30px 50px 30px;
+  padding: 20px;
+  color: #FFF;
+}
+
+.user-page-profile{
+  text-align: center;
+  margin: 0 20px 10px 20px;
+  border-bottom: 2px solid;
+  border-color: #888;
+}
+
+.user-page-content{
+  margin-left: 50px;
+}
+
+.user-page-content p{
+  margin-bottom: 5px;
+}
+
+
+
+.bloglist-footer{
+  color: #DDD;
+}
+
+.user-page-guilds{
+  padding: 0 30px;
+}
+
+.user-page-guilds-menu{
+  display: flex;
+  list-style: none;
+  border-bottom: 2px solid;
+  padding-bottom: 20px;
+  border-color: #888;
+}
+
+.user-page-guilds-menu li{
+  margin-right: 50px;
+  font-size: 18px;
+}
+
+.user-page-noselect-menu{
+  color: #888;
+}
+
+.user-page-noselect-menu:hover{
+  color: #111;
+  text-decoration: none;
+}
+
+.user-page-select-menu{
+  border-bottom: 3px solid;
+  border-color: #673BB7;
+  color: #333;
+}
+
+.user-page-select-menu:hover{
+  color: #111;
+  text-decoration: none;
+}
+
+.user-page-guilds-container{
+  border-bottom: 2px solid;
+  border-color: #888;
+  margin-top: 10px;
+}
+
+.user-page-guilds-container{
+  color: #666;
+}
+
+.user-page-guilds-container a{
+  color: #666;
+}
+
+.user-page-guilds-container p{
+  margin-left: 40px;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width:750px){
+  .user-page-left{
+    background-color: #3e3d3d;
+  }
+  
+  .user-page-blog{
+    margin: 30px 45px 50px 50px;
+  }
+  
+  .user-page-guilds-list{
+    padding: 10px 30px;
+  }
+}
+
+@media screen and (min-width:751px){
+  .user-page-left{
+    min-height: 100vh;
+    background-color: #3e3d3d;
+  }
+  
+  .user-page-blog{
+    margin: 80px 30px 80px 30px;
+  }
+  
+  .user-page-guilds-list{
+    padding: 10px 10px;
+  }
+}

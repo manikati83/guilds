@@ -11,6 +11,7 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
     @blogs = @guild.blogs.order(id: :desc).limit(10)
+    @news = @guild.guild_news.order(id: :desc).limit(5)
   end
   
   def new
@@ -75,6 +76,7 @@ class GuildsController < ApplicationController
     @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
     @approvals = @guild.approvals.order(id: :desc).page(params[:page]).per(25)
   end
+  
   
   
   

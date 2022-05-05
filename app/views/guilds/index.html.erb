@@ -1,15 +1,22 @@
-<div class="container">
-  <div>
-    <p class="build-btn">
-      <%= link_to "ギルドを設立", new_guild_path, class: 'btn btn-success' %>
-    </p>
-  </div>
-  <div>
-    <h3 class="heading">承認待ちギルド</h3>
-    <%= render 'guilds/guilds', guilds: @approval_guilds %>
-  </div>
-  <div>
-    <h3 class="heading">加入ギルド</h3>
-    <%= render 'guilds/guilds', guilds: @join_guilds %>
+<div class="wrap">
+  <div class="row">
+    <div id="side-nav" class="col-3">
+      <%= render 'guilds/side_navbar' %>
+    </div>
+    <div id="guilds-main" class="col-8">
+      <div>
+        <p class="build-btn">
+          <%= link_to "ギルドを設立", new_guild_path, class: 'btn btn-success' %>
+        </p>
+      </div>
+      <div>
+        <h3 class="heading">承認待ちギルド</h3>
+        <%= render 'guilds/guilds', guilds: @approval_guilds %>
+      </div>
+      <div>
+        <h3 class="heading">加入ギルド</h3>
+        <%= render 'guilds/guilds', guilds: @join_guilds %>
+      </div>
+    </div>
   </div>
 </div>

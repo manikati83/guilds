@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.join_guilds.order(id: :desc).page(params[:page]).per(10)
   end
 
   def new
@@ -21,6 +23,18 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
+  end
+  
+  def favorite_guilds
+    @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.favorites.order(id: :desc).page(params[:page]).per(10)
+  end
+  
+  def approval_guilds
+    @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.approval_guilds.order(id: :desc).page(params[:page]).per(10)
   end
   
   

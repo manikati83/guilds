@@ -1,5 +1,7 @@
-<h1>New Blog</h1>
-
-<%= render 'form', blog: @blog %>
-
-<%= link_to 'Back', blogs_guild_path(id: @guild.id) %>
+<div class="container">
+  <div class="row">
+    <div class="col-12 blog-create-area">
+      <%= render 'form', blog: @blog %>
+    </div>
+  </div>
+</div>

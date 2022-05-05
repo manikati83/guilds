@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_083119) do
+ActiveRecord::Schema.define(version: 2022_05_03_074328) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 2022_04_16_083119) do
     t.index ["user_id"], name: "index_blogs_on_user_id"
   end
 
+  create_table "favorite_guilds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "guild_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guild_id"], name: "index_favorite_guilds_on_guild_id"
+    t.index ["user_id", "guild_id"], name: "index_favorite_guilds_on_user_id_and_guild_id", unique: true
+    t.index ["user_id"], name: "index_favorite_guilds_on_user_id"
+  end
+
   create_table "guild_blog_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "guild_id", null: false
     t.string "name"
@@ -91,6 +101,14 @@ ActiveRecord::Schema.define(version: 2022_04_16_083119) do
     t.index ["guild_id"], name: "index_guild_members_on_guild_id"
     t.index ["user_id", "guild_id"], name: "index_guild_members_on_user_id_and_guild_id", unique: true
     t.index ["user_id"], name: "index_guild_members_on_user_id"
+  end
+
+  create_table "guild_news", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "guild_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guild_id"], name: "index_guild_news_on_guild_id"
   end
 
   create_table "guilds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -140,11 +158,14 @@ ActiveRecord::Schema.define(version: 2022_04_16_083119) do
   add_foreign_key "blogs", "guild_blog_tags"
   add_foreign_key "blogs", "guilds"
   add_foreign_key "blogs", "users"
+  add_foreign_key "favorite_guilds", "guilds"
+  add_foreign_key "favorite_guilds", "users"
   add_foreign_key "guild_blog_tags", "guilds"
   add_foreign_key "guild_hashtag_relations", "guilds"
   add_foreign_key "guild_hashtag_relations", "hashtags"
   add_foreign_key "guild_members", "guilds"
   add_foreign_key "guild_members", "users"
+  add_foreign_key "guild_news", "guilds"
   add_foreign_key "guilds", "users"
   add_foreign_key "messages", "guilds"
   add_foreign_key "messages", "users"

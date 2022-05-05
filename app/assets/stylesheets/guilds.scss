@@ -18,7 +18,7 @@
 }
 
 .guildpage-name{
-  font-size: 2em;
+  font-size: 1.8em;
   margin-left: 50px;
 }
 
@@ -117,6 +117,98 @@
 }
 
 
+/*guild/index */
+#side-nav{
+  min-height: 100vh;
+  background-color: #3e3d3d;
+  color: #FFF;
+}
+
+#sidebar-user-menu a{
+  color: #FFF;
+  text-decoration: none;
+}
+
+
+@media screen and (max-width:750px){
+  #guilds-main{
+    margin-left: 20px;
+  }
+  
+  #side-nav{
+    padding-right: 0;
+  }
+  
+  #sidebar-user-top h5{
+    display: none;
+  }
+  
+  #sidebar-user-top p{
+    display: none;
+  }
+  
+  #sidebar-user-top-icon{
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  #sidebar-user-icon{
+    max-width: 50px;
+  }
+  
+  .sidebar-user-menu{
+    list-style: none;
+  }
+  
+  .sidebar-user-menu span{
+    display: none;
+  }
+  
+  .sidebar-user-menu li{
+    margin-top: 50px;
+    font-size: 26px;
+  }
+}
+
+@media screen and (min-width:751px){
+  #guilds-main{
+    margin-left: 50px;
+  }
+  
+  #sidebar-user-top{
+    margin: 80px 30px 50px 30px;
+    padding: 20px;
+    background-color: #666;
+    border-radius: 10px;
+  }
+  
+  #sidebar-user-top-icon{
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+  }
+  
+  #sidebar-user-top-content{
+  
+  }
+  
+  #sidebar-user-top-content p{
+    margin-bottom: 5px;
+  }
+  
+  .sidebar-user-menu{
+    list-style: none;
+  }
+  
+  .sidebar-user-menu li{
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+}
+
+
+
+
 /*guild/show */
 #img-box{
   text-align:center;
@@ -164,6 +256,38 @@
   border-radius: 10px;
 }
 
+.no-favorite a{
+  margin-left: 30px;
+  color: #EEE;
+  background-color: #9057FF;
+  border-radius: 10px;
+  border-bottom: 2px solid;
+  border-color: #666;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.no-favorite a:hover{
+  border-bottom: 0 solid;
+  background-color: #A16EFF;
+}
+
+.favorite a{
+  margin-left: 30px;
+  padding: 5px;
+  color: #DDD;
+  background-color: #555555;
+  border-radius: 10px;
+  border-bottom: 2px solid;
+  border-color: #666;
+  text-decoration: none;
+}
+
+.favorite a:hover{
+  border-bottom: 0 solid;
+  background-color: #666666;
+}
+
 #guild-content{
   color: #EEE;
   margin: 30px;
@@ -174,6 +298,48 @@
   background-color: #999;
   border-radius: 10px;
   padding: 20px;
+}
+
+
+#top-newslist{
+  background-color: #3e3d3d;
+  border-bottom: 2px solid;
+  border-color: #222;
+  color: #FFF;
+  padding: 20px 50px;
+}
+
+.add-news{
+  float: right;
+  margin-right: 30px;
+}
+
+.top-newslist{
+  height: 200px;
+  width: 100%;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.top-newslist::-webkit-scrollbar {
+  height: 14px; /* スクロールバーの高さ */
+}
+ 
+.top-newslist::-webkit-scrollbar-thumb {
+  background: #d2b48c; /* ツマミの色 */
+  border-radius: 7px; /* ツマミ両端の丸み */
+}
+ 
+.top-newslist::-webkit-scrollbar-track {
+  background: #f5deb3; /* トラックの色 */
+  border-radius: 7px; /* トラック両端の丸み */
+}
+
+.top-newslist-content{
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #999;
+  border-radius: 10px;
 }
 
 
@@ -214,6 +380,7 @@
   flex-shrink: 0;
   padding: 10px;
   border-radius: 10px;
+  position: relative;
 }
 
 .boxlist-title h4{
@@ -232,6 +399,11 @@
 .boxlist-content p{
   font-size: 1em;
   color: #DDD;
+}
+
+.bloglist-footer{
+  position: absolute;
+  bottom: 15px;
 }
 
 .user-icon{
@@ -263,10 +435,12 @@
   color: #66FF33;
 }
 
+
+
 /* guild/blog */
 .parent{
   font-size: 1.3em;
-  padding-top: 30px;
+  padding-top: 5px;
 }
 .parent ul{
   display: none;
@@ -292,7 +466,100 @@
   margin: 0 30px;
 }
 
+.blog-show-wrap{
+  background-color: #FFF;
+  padding: 20px 30px;
+}
+
+.blog-show-content{
+  margin: 0 10px;
+}
+
+.blog-wrap{
+  margin-bottom: 20px;
+}
+
+.blog-title a{
+  color: #666;
+  text-decoration: none;
+}
+
+.blog-title a:hover{
+  color: #FF9933;
+}
+
+.blog-content{
+  border-bottom: 2px solid;
+  border-color: #888;
+  padding-bottom: 10px;
+}
+
+
+.dropdown {
+  margin: 0 0 0 auto;
+  position: relative;
+  float: right;
+}
+.dropdown__btn {
+  display: block;
+  width: 1.5em;
+  padding: 0.2em;
+  background: none;
+  border: 0;
+}
+button:focus{
+  outline: 0;
+}
+.dropdown__btn.is-open::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+.dropdown__btn.is-open + .dropdown__body {
+  display: block;
+  z-index: 5;
+}
+.dropdown__body {
+  display: none;
+  width: 150px;
+  background: #fff;
+  box-shadow: 0 2px 6px 2px rgba(60,64,67,0.149), 0 1px 2px 0 rgba(60,64,67,0.302);
+  border-radius: 4px;
+  overflow: hidden;
+  position: absolute;
+  top: 32px;
+  left: 0;
+}
+.dropdown__list {
+  margin: 0;
+  padding: 0;
+}
+.dropdown__item {
+  display: block;
+}
+.dropdown__item-link {
+  display: block;
+  padding: 1em 1.2em;
+  font-size: 0.95em;
+  text-decoration: none;
+  color: #444;
+}
+.dropdown__item-link:hover {
+  background: #fbfbfb;
+}
+
+
 @media screen and (max-width:750px) {
+  
+  .blog-content p{
+    margin-bottom: 5px;
+  }
+  
   #tag-list a{
     color: #FFF;
   }
@@ -411,6 +678,21 @@
 }
 
 @media screen and (min-width:751px) {
+  #blog-wrap{
+    margin-top: 50px;
+  }
+  
+  .blog-content p{
+    margin-bottom: 5px;
+  }
+  
+  .blog-inline{
+    display: inline;
+    margin-right: 100px;
+    margin-bottom: 30px;
+  }
+  
+  
   #menu_btn{
     display: none;
   }
@@ -426,10 +708,21 @@
   
   .side-menu li{
     color: #CCCCFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .side-menu li:hover{
+    overflow: visible;
   }
   
   .side-menu li:hover{
     color: #FFF;
+  }
+  
+  .side-menu .parent{
+    width: 80%;
   }
   
   .side-menu a{
@@ -439,7 +732,11 @@
   
   .side-menu li a:hover{
     color: #FFF;
-  }  
+  }
+  
+  #tag-list{
+    margin-left: 50px;
+  }
 }
 
 

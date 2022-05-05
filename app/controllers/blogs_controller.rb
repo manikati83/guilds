@@ -22,6 +22,7 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
+    @guild = Guild.find(params[:guild_id])
   end
 
   # POST /blogs or /blogs.json
@@ -32,6 +33,9 @@ class BlogsController < ApplicationController
     
     if params[:blog][:name] and params[:blog][:guild_blog_tag_id] == ""
       new_tag = @guild.guild_blog_tags.build(tag_params)
+      if params[:blog][:name] == ""
+        new_tag = @guild.guild_blog_tags.build(name: "untitled")
+      end
       new_tag.save
       @blog.guild_blog_tag_id = new_tag.id
     end
@@ -61,10 +65,16 @@ class BlogsController < ApplicationController
 
   # DELETE /blogs/1 or /blogs/1.json
   def destroy
+    @guild = @blog.guild
+    blog_tag = @blog.guild_blog_tag
     @blog.destroy
+    if blog_tag.blogs.count == 0
+      blog_tag.destroy
+    end
+    
 
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: "Blog was successfully destroyed." }
+      format.html { redirect_to blogs_guild_path(@guild), notice: "Blog was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -19,7 +19,7 @@
           <% else %>
             <p class="text-dark">オフライン</p>
           <% end %>
-          <p>ログイン履歴：<%= member.user.login_at(member.user) %>分前</p>
+          <p>ログイン履歴：<%= member.user.how_long_ago %></p>
         </div>
       </div>
     <% end %>

@@ -1,16 +1,20 @@
 <%= render 'guilds/navbar' %>
 <div class="wrap">
   <div class="row">
-    <div class="col-md-8 order-md-2 main">
+    <div class="col-md-8 order-md-2 main px-0">
       
       <div id="menu_btn" class="openbtn">
           <i class="fa fa-list fa-2x"></i>&nbsp;<h5>Blog List</h5>
       </div>
       
-      <div class="build-btn">
-        <h3><%= link_to 'ブログ作成', new_blog_path(guild_id: @guild.id), class: 'btn btn-success' %></h3>
+      <% if @guild.members.include?(current_user) %>
+        <div class="build-btn">
+          <h3><%= link_to 'ブログ作成', new_blog_path(guild_id: @guild.id), class: 'btn btn-success' %></h3>
+        </div>
+      <% end %>
+      <div id="blog-wrap">
+        <%= render 'guilds/blog', blogs: @blogs %>
       </div>
-      <%= render 'guilds/blog', blogs: @blogs %>
     </div>
     <div id="menu" class="col-md-3 order-md-1 side-menu pt-5 SlideOut">
       <%= render 'guilds/tags' %>

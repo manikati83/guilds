@@ -16,9 +16,14 @@ class Guild < ApplicationRecord
   has_many :blogs
   
   has_many :approvals, dependent: :destroy
-  has_many :approval_users, through: :approvals
+  has_many :approval_users, through: :approvals, source: :user
   
   has_many :messages
+  
+  has_many :guild_news
+  
+  has_many :favorite_guilds, dependent: :destroy
+  has_many :favorites, through: :favorite_guilds, source: :user
   
   
   after_create do
@@ -40,6 +45,10 @@ class Guild < ApplicationRecord
     end
   end
   
+  def approval_user?(user)
+    self.approval_users.include?(user)
+  end
+  
   def add_member(user)
     if self.members.count < self.limit_member
       self.guild_members.find_or_create_by(user_id: user.id)
@@ -49,5 +58,21 @@ class Guild < ApplicationRecord
   
   def del_member(uesr)
     self.guild_members.find_by(user_id: user.id).destroy
+  end
+  
+  def how_long_ago
+    if (Time.now - self.created_at) <= 60 * 60
+      # 60分以内なら
+      ((Time.now - self.created_at) / 60).to_i.to_s + "分前"
+    elsif (Time.now - self.created_at) <= 60 * 60 * 24
+      # 24時間以内なら
+      ((Time.now - self.created_at) / 3600).to_i.to_s + "時間前"
+    elsif (Date.today - self.created_at.to_date) <= 30
+      # 30日以内なら
+      (Date.today - self.created_at.to_date).to_i.to_s + "日前"
+    else
+      #　それ以降
+      self.created_at
+    end
   end
 end

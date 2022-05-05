@@ -23,7 +23,7 @@
     <%= form_with(model: @new_message) do |f| %>
       <%= hidden_field_tag :guild_id, @guild.id %>
       <div class="form-group">
-         <%= f.text_field :message, class: 'form-control' %>
+         <%= f.text_area :message, class: 'form-control', id: 'chat-text-area', rows: 3 %>
       </div>
     <% end %>
   </div>

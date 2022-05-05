@@ -1,3 +1,28 @@
 // Place all the styles related to the blogs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.blog-create-area{
+  padding: 30px;
+  
+}
+
+
+.attachment img{
+  border-radius: 10px;
+  margin: 30px 0;
+}
+
+.trix-content h1{
+  font-size: 1.5em;
+  border-bottom: 2px solid;
+  border-color: #CCCCFF;
+  margin-bottom: 10px;
+}
+
+trix-editor{
+  background-color: #FFF;
+  border-radius: 5px;
+  min-height: 20em;
+}

@@ -1,12 +1,14 @@
 <% blogs.each do |blog| %>
-  <div class="media bg-white rounded">
-    <div class="media-body">
+  <div class="blog-wrap">
+    <div class="blog-title">
       <h3><%= link_to blog.title, blog_path(id: blog.id), class: 'guild-name', 'data-turbolinks': false %></h3>
+    </div>
+    <div class="blog-content">
       <% if blog.guild_blog_tag %>
-        <p>ブログタグ:<%= blog.guild_blog_tag.name %></p>
+        <p>ブログタグ&nbsp;:&nbsp;<%= blog.guild_blog_tag.name %></p>
       <% end %>
-      <p>作成日:<%= blog.created_at %></p>
+      <p class="blog-inline">投稿者&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= blog.user.name %></p>
+      <p class="blog-inline">投稿日&nbsp;:&nbsp;<%= blog.created_at %></p>
     </div>
   </div>
 <% end %>
-<%= paginate blogs %>

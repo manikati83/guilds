@@ -2,8 +2,8 @@
   <% messages.each do |message| %>
     <div class="media border-bottom">
       <div class="media-body">
-        <h5><img class="rounded" src="<%= gravatar_url(message.user, { size: 30 }) %>" alt="">&nbsp;<%= message.user.name %></h5>
-        <p><%= message.message %></p>
+        <h5><img class="user-icon" src="<%= gravatar_url(message.user, { size: 30 }) %>" alt="">&nbsp;<%= message.user.name %><span id="message-date"><%= message.how_long_ago %></span></h5>
+        <p><%= safe_join(message.message.split("\n"),tag(:br)) %></p>
       </div>
     </div>
   <% end %>

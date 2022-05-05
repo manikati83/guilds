@@ -30,7 +30,7 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
     /*global $*/
     if (guild_id == data['guild_id']) {
       const sentence = '<div class="media"><div class="media-body">\
-      <h5><img class="rounded" src="https://secure.gravatar.com/avatar/' + data["address"] + '?s=30&d=mp" alt="">&nbsp;' + data["name"] + '</h5>\
+      <h5><img class="user-icon" src="https://secure.gravatar.com/avatar/' + data["address"] + '?s=30&d=mp" alt="">&nbsp;' + data["name"] + '</h5>\
       <p>' + data["message"] + '</p></div></div>'
       $('#message').append(sentence);
       

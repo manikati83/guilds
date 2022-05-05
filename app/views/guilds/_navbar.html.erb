@@ -15,7 +15,11 @@
         <% if @guild.join_type %>
           <!-- 依頼ありギルド !-->
           <li><%= link_to 'ギルドへ依頼', root_path, class: 'menu' %></li>
-          <li><%= link_to '加入申請', new_approval_path(id: @guild.id), class: 'menu' %></li>
+          <% if @guild.approval_user?(current_user) %>
+            <li><%= link_to '申請済み', guild_path(id: @guild.id), class: 'menu' %></li>
+          <% else %>
+            <li><%= link_to '加入申請', new_approval_path(id: @guild.id), class: 'menu' %></li>
+          <% end %>
         <% else %>
           <!-- 依頼なしギルド !-->
           <li><%= link_to 'ギルドへ依頼', root_path, class: 'menu' %></li>

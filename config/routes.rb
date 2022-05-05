@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
-  resources :users, only: [:index, :show, :create]
+  resources :users, only: [:index, :show, :create] do
+    member do
+      get :favorite_guilds
+      get :join_guilds
+      get :approval_guilds
+    end
+  end
   
   get 'search', to: 'guilds#search'
   get 'tags', to: 'guilds#tags'
@@ -17,6 +23,7 @@ Rails.application.routes.draw do
       get :blogs
       get :members
       get :approval_members
+      get :news
     end
   end
   
@@ -24,4 +31,5 @@ Rails.application.routes.draw do
   resources :blogs
   resources :approvals
   resources :messages
+  resources :favorite_guilds, only: [:create, :destroy]
 end
