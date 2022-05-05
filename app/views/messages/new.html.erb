@@ -22,8 +22,13 @@
     
     <%= form_with(model: @new_message) do |f| %>
       <%= hidden_field_tag :guild_id, @guild.id %>
-      <div class="form-group">
-         <%= f.text_area :message, class: 'form-control', id: 'chat-text-area', rows: 3 %>
+      <div id="chat-text-area-group" class="form-group">
+         <%= f.text_area :message, id: 'chat-text-area', rows: 3 %>
+         <div class="chat-submit-btn">
+            <%= f.button :type => "submit", id: 'submit-btn', style: 'border-style: none;' do %>
+             <a class="btn"><i class="fa fa-paper-plane fa-lg"></i>&nbsp;<span>送信</span></a>
+            <% end %>
+         </div>
       </div>
     <% end %>
   </div>

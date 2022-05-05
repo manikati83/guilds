@@ -29,9 +29,10 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
     // Called when there's incoming data on the websocket for this channel
     /*global $*/
     if (guild_id == data['guild_id']) {
-      const sentence = '<div class="media"><div class="media-body">\
+      const message = data["message"].replace(/(\r\n|\n|\r)/gm, '<br>')
+      const sentence = '<div class="media chat-media"><div class="media-body">\
       <h5><img class="user-icon" src="https://secure.gravatar.com/avatar/' + data["address"] + '?s=30&d=mp" alt="">&nbsp;' + data["name"] + '</h5>\
-      <p>' + data["message"] + '</p></div></div>'
+      <p>' + message + '</p></div></div>'
       $('#message').append(sentence);
       
       var list;
