@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     @guild = Guild.find(params[:id])
     @messages = @guild.messages.all
     @new_message = current_user.messages.build
+    @members = @guild.members.order(online: :desc)
   end
   
   def create

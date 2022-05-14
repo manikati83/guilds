@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :favorite_guilds, dependent: :destroy
   has_many :favorites, through: :favorite_guilds, source: :guild
   
+  has_many :galleries
+  
   
   def favorite(guild)
     self.favorite_guilds.find_or_create_by(guild_id: guild.id)

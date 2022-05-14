@@ -1,0 +1,22 @@
+<%= render 'guilds/navbar' %>
+
+<div id="gallery-show">
+  <div class="row" id="gallery-show-wrap">
+    <div class="col-md-12">
+      <h3><img class="user-icon" src="<%= gravatar_url(@gallery.user, { size: 30 }) %>" alt="">&nbsp;<%= @gallery.user.name %></h3>
+    </div>
+    <div class="col-md-6" id="gallery-show-photo">
+      <%= image_tag @gallery.photo.url %>
+    </div>
+    <div class="col-md-6" id="gallery-show-content">
+      <% unless @gallery.content.nil? %>
+        <div class="gallery-show-content">
+          <p><%= safe_join(@gallery.content.split("\n"),tag(:br)) %></p>
+        </div>
+      <% end %>
+      <div id="gallery-show-content-footer">
+        <h5><%= @gallery.created_format %><h5></h5>
+      </div>
+    </div>
+  </div>
+</div>

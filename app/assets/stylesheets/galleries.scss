@@ -1,0 +1,120 @@
+// Place all the styles related to the galleries controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#new-gallery{
+  margin-top: 50px;
+}
+
+#new-gallery-pre h5{
+  margin-top: 20px;
+}
+
+#user-img{
+  margin-bottom: 20px;
+}
+
+#photo-content{
+  resize: none;
+  margin-bottom: 20px;
+}
+
+#gallery-submit{
+  text-align: right;
+  margin-bottom: 30px;
+  margin-right: 5%;
+}
+
+#new-gallery-pre{
+  width: 100%;
+  text-align: center;
+  border: 2px solid;
+  margin-bottom: 20px;
+}
+
+#new-gallery-pre img{
+  width: 80%;
+  height: auto;
+  margin: 20px 0;
+  object-fit: cover
+}
+
+@media screen and (max-width: 750px){
+  #gallery-show-photo{
+    width: 100%;
+    text-align: center;
+    margin: 0 5%;
+    padding: 0;
+  }
+  
+  #gallery-show-content-footer{
+    position: absolute;
+    color: #FFF;
+  }
+  
+  #gallery-show-content{
+    margin: 20px 2%;
+  }
+}
+
+@media screen and (min-width: 751px){
+  .photo-conf{
+    margin-left: 20px;
+  }
+  
+  #gallery-show-photo{
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+  }
+  
+  .gallery-show-content{
+    padding-right: 5%;
+  }
+  
+  #gallery-show-content-footer{
+    position: absolute;
+    bottom: 15px;
+    color: #FFF;
+  }
+}
+
+/* show */
+#gallery-show{
+  background-color: #FFF;
+  height: 100vh;
+}
+
+.row{
+  margin: 0;
+}
+
+#gallery-show-wrap{
+  padding: 50px 0;
+  background-color: #3e3d3d;
+}
+
+#gallery-show-wrap h3{
+  color: #FFF;
+  margin-left: 2%;
+  margin-bottom: 20px;
+}
+
+#gallery-show-photo img{
+  max-width: 100%;
+  width: auto;
+  height: 500px;
+  border-radius: 10px;
+}
+
+#gallery-show-content p{
+  background-color: #999;
+  color: #FFF;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 100px;
+}
+
+#gallery-show-content-footer h5{
+  font-size: 1em;
+}

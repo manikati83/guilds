@@ -1,0 +1,15 @@
+<% guilds.each do |guild| %>
+  <div class="media bg-white rounded guild-media">
+    <div class="media-body">
+      <h3><%= link_to guild.name, guild_path(id: guild.id), class: 'guild-name' %></h3>
+      <ul class="mb-2"><i class="fa fa-tag"></i>
+        <% guild.hashtags.each do |tag| %>
+          <li class="mr-1" style="display: inline-block; font-family: Arial;"><%= link_to tag.hashname + ",", tags_path(id: tag.id), class: "text-dark" %></li>
+        <% end %>
+      </ul>
+      <p><i class="fa fa-chess-king master-icon"></i>ギルドマスター&nbsp;:&nbsp;<img class="rounded" src="<%= gravatar_url(guild.user, { size: 25 }) %>" alt="">&nbsp;<%= guild.user.name %></p>
+      <p><i class="fa fa-user"></i>メンバー&nbsp;:&nbsp;<%= guild.members.count %>/<%= guild.limit_member %></p>
+    </div>
+  </div>
+<% end %>
+<%= paginate guilds %>

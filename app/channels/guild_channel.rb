@@ -6,7 +6,8 @@ class GuildChannel < ApplicationCable::Channel
     current_user.update_attributes(online: true, online_at: DateTime.now)
     @guild = current_user.join_guilds.find_by(id: params[:guild_id])
     #reject if @guild.nil?
-    stream_for(@guild)  
+    stream_for(@guild)
+    GuildChannel.broadcast_to(@guild, guild_id: @guild.id, join_user_id: current_user.id)
   end
 
   def unsubscribed

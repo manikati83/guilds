@@ -25,6 +25,8 @@ class Guild < ApplicationRecord
   has_many :favorite_guilds, dependent: :destroy
   has_many :favorites, through: :favorite_guilds, source: :user
   
+  has_many :galleries
+  
   
   after_create do
     guild = Guild.find_by(id: id)
@@ -74,5 +76,9 @@ class Guild < ApplicationRecord
       #　それ以降
       self.created_at
     end
+  end
+  
+  def created_format
+    self.created_at.strftime('%Y/%m/%d')
   end
 end

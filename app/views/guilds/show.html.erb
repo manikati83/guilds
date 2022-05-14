@@ -8,19 +8,20 @@
 
 <div class="guild-info">
   <div class="row">
-    <div id="guild-status" class="col-md-4">
+    <div id="guild-status" class="col-md-5">
       <div class="guild-status">
-        <p>ギルドマスター&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= @guild.user.name %></p>
-        <p>ギルド設立日&nbsp;:&nbsp;<%= @guild.created_at %></p>
+        <p>GM&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= @guild.user.name %></p>
+        <p>ギルド設立日&nbsp;:&nbsp;<%= @guild.created_format %></p>
         <p>メンバー&nbsp;:&nbsp;<%= @guild.members.count %></p>
+        <p>お気に入り&nbsp;:&nbsp;<%= @guild.favorites.count %></p>
         <% if current_user.favorite?(@guild) %>
-          <p class="favorite">お気に入り&nbsp;:&nbsp;<%= @guild.favorites.count %><%= link_to("お気に入り登録済み", favorite_guild_path(guild_id: @guild.id), {method: :"delete"}) %></p>
+          <span class="favorite"><%= link_to("お気に入り登録済み", favorite_guild_path(guild_id: @guild.id), {method: :"delete"}) %></span>
         <% else %>
-          <p class="no-favorite">お気に入り&nbsp;:&nbsp;<%= @guild.favorites.count %><%= link_to("お気に入り登録", favorite_guilds_path(guild_id: @guild.id), {method: :"post"}) %></p>
+          <span class="no-favorite"><%= link_to("お気に入り登録", favorite_guilds_path(guild_id: @guild.id), {method: :"post"}) %></span>
         <% end %>
       </div>
     </div>
-    <div id="guild-content" class="col-md-7">
+    <div id="guild-content" class="col-md-6">
       <div class="guild-content">
         <p><%= safe_join(@guild.content.split("\n"),tag(:br)) %></p>
       </div>

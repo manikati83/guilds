@@ -52,6 +52,7 @@ class GuildsController < ApplicationController
   def tags
     @tag = Hashtag.find(params[:id])
     @guilds = @tag.guilds.order(id: :desc).page(params[:page]).per(25)
+    @guild_tags = Hashtag.find(GuildHashtagRelation.group(:hashtag_id).order('count(hashtag_id) desc').limit(10).pluck(:hashtag_id))
   end
   
   def search
@@ -75,6 +76,11 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
     @approvals = @guild.approvals.order(id: :desc).page(params[:page]).per(25)
+  end
+  
+  def gallery
+    @guild = Guild.find(params[:id])
+    @galleries = @guild.galleries.order(id: :desc).page(params[:page]).per(25)
   end
   
   

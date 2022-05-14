@@ -6,6 +6,40 @@
   color: #FFCC33;
 }
 
+.guild-list-box{
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: #FFF;
+  font-family: Georgia;
+}
+
+.guild-list-title a{
+  color: #666;
+  text-decoration: none;
+}
+
+.guild-list-content{
+  padding-left: 20px;
+}
+
+.guild-list-content p{
+  margin-bottom: 5px;
+}
+
+.guild-list-tag{
+  padding-left: 0;
+}
+
+.guild-list-tag li{
+  display: inline-block;
+  margin-rigt: 10px;
+}
+
+.guild-list-user{
+  border-radius: 50px;
+}
+
 
 /* _navbar */
 .menu-bar{
@@ -103,17 +137,77 @@
 
 
 /* guilds/search */
-#search{
+.search-guild-tag{
   margin-top: 50px;
-  margin-bottom: 30px;
+  border: 2px solid;
+  border-color: #999;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #EEE;
+}
+
+.search-guild-tag h5{
+  border-bottom: 2px solid;
+  border-color: #673BB7;
+  margin-bottom: 20px;
+}
+
+#search{
+  border: 2px solid;
+  border-color: #673BB7;
+  border-radius: 10px;
+  margin: 50px 0;
+  padding: 20px;
+  background-color: #EEE;
 }
 
 #search-box{
-  padding-right: 0;
+  margin-bottom: 10px;
 }
 
-#search-btn{
-  text-align: right;
+.search-label{
+  display: block;
+}
+
+.search-radio-button{
+  margin-left: 30px;
+}
+
+.search-border{
+  margin-bottom: 10px;
+  border-bottom: 2px solid;
+  border-color: #999;
+}
+
+
+@media screen and (max-width:750px){
+  .search-textfield{
+    width: 70%;
+    display: inline;
+    border-radius: 30px;
+  }
+  
+  .search-submit{
+    width: 20%;
+    border-radius: 30px;
+  }
+  
+  label{
+    display: block;
+  }
+}
+
+@media screen and (min-width:751px){
+  .search-textfield{
+    width: 70%;
+    display: inline;
+    border-radius: 30px;
+  }
+  
+  .search-submit{
+    width: 18%;
+    border-radius: 30px;
+  }
 }
 
 
@@ -130,7 +224,7 @@
 }
 
 
-@media screen and (max-width:750px){
+@media screen and (max-width:1100px){
   #guilds-main{
     margin-left: 20px;
   }
@@ -158,6 +252,8 @@
   
   .sidebar-user-menu{
     list-style: none;
+    padding-left: 0;
+    text-align: center;
   }
   
   .sidebar-user-menu span{
@@ -170,7 +266,7 @@
   }
 }
 
-@media screen and (min-width:751px){
+@media screen and (min-width:1101px){
   #guilds-main{
     margin-left: 50px;
   }
@@ -217,9 +313,10 @@
 #guild-img{
   width: 100%;
   height: 400px;
+  object-fit: cover
 }
 
-@media screen and (max-width:600px){
+@media screen and (max-width:750px){
   #guild_img{
     max-width: 100%;
     height: 300px;
@@ -244,7 +341,7 @@
   #guild-status{
     margin-top: 30px;
     margin-bottom: 30px;
-    padding-left: 100px;
+    padding-left: 10%;
     color: #EEE;
   }
 }
@@ -257,7 +354,6 @@
 }
 
 .no-favorite a{
-  margin-left: 30px;
   color: #EEE;
   background-color: #9057FF;
   border-radius: 10px;
@@ -273,7 +369,6 @@
 }
 
 .favorite a{
-  margin-left: 30px;
   padding: 5px;
   color: #DDD;
   background-color: #555555;
@@ -294,7 +389,6 @@
 }
 
 .guild-content{
-  height: 200px;
   background-color: #999;
   border-radius: 10px;
   padding: 20px;
@@ -740,4 +834,56 @@ button:focus{
 }
 
 
+/* guild/gallery */
 
+#gallery-nav{
+  background-color: #333;
+  padding: 10px 0;
+  border-top: 2px solid;
+}
+
+#gallery-nav p{
+  display: inline;
+  margin-left: 50px;
+  color: #FFF;
+}
+
+.photo-wrap{
+  padding-left: 5%;
+}
+
+@media screen and (max-width: 750px){
+  #gallery-nav a{
+   margin-left: 60%;
+  }
+  
+  .photo-content{
+    width: 47%;
+    height: 260px;
+    display: inline-block;
+  }
+  
+  .photo-content img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 751px){
+  #gallery-nav a{
+   margin-left: 80%;
+  }
+  
+  .photo-content{
+    width: 23%;
+    height: 260px;
+    display: inline-block;
+  }
+  
+  .photo-content img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

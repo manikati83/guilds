@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get :members
       get :approval_members
       get :news
+      get :gallery
     end
   end
   
@@ -32,4 +33,5 @@ Rails.application.routes.draw do
   resources :approvals
   resources :messages
   resources :favorite_guilds, only: [:create, :destroy]
+  resources :galleries, only: [:new, :show, :create, :destroy]
 end

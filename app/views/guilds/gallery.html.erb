@@ -1,0 +1,15 @@
+<%= render 'guilds/navbar' %>
+
+<div id="gallery-nav">
+  <p>投稿数&nbsp;:&nbsp;<%= @galleries.count %></p>
+  <%= link_to "投稿する", new_gallery_path(guild_id: @guild.id), class: "btn btn-success" %>
+</div>
+
+
+<div class="photo-wrap">
+  <% @galleries.each do |gallery| %>
+  <div class="photo-content">
+    <a href="/galleries/<%= gallery.id %>"><%= image_tag gallery.photo.url, class: 'gallery-photo' %></a>
+  </div>
+  <% end %>
+</div>

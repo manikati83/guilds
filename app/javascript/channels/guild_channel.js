@@ -28,7 +28,17 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
     const guild_id = now_data.getAttribute("data-guild-id")
     // Called when there's incoming data on the websocket for this channel
     /*global $*/
-    if (guild_id == data['guild_id']) {
+    if (data['join_user_id']) {
+      if (guild_id == data['guild_id']){
+        const join_user = document.getElementById(data['join_user_id']);
+        if (!join_user.children[1].classList.contains("join")){
+          join_user.children[1].classList.add('join');
+        }
+        if (!join_user.classList.contains("online")){
+          join_user.classList.add('online')
+        }
+      }
+    }else if (guild_id == data['guild_id']) {
       const message = data["message"].replace(/(\r\n|\n|\r)/gm, '<br>')
       const sentence = '<div class="media chat-media"><div class="media-body">\
       <h5><img class="user-icon" src="https://secure.gravatar.com/avatar/' + data["address"] + '?s=30&d=mp" alt="">&nbsp;' + data["name"] + '</h5>\
