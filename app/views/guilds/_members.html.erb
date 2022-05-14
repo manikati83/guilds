@@ -1,7 +1,7 @@
 <ul id="member-list">
   <% members.each do |member| %>
     <% if member.online %>
-      <% if member.guild_members.where(guild_id: @guild.id).first.connection %>
+      <% if member.guild_members.where(guild_id: @guild.id).first.connection or member.id == current_user.id %>
         <li class="member online mt-3" id="<%= member.id %>" onclick="func1(this)"><span class="online-lamp">・</span><img class="user-icon join" src="<%= gravatar_url(member, { size: 25 }) %>" alt="">&nbsp;<span class="user-name"><%= member.name %></span></li>
       <% else %>
         <li class="member online mt-3" id="<%= member.id %>" onclick="func1(this)"><span class="online-lamp">・</span><img class="user-icon" src="<%= gravatar_url(member, { size: 25 }) %>" alt="">&nbsp;<span class="user-name"><%= member.name %></span></li>
