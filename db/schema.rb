@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_07_163432) do
+ActiveRecord::Schema.define(version: 2022_05_14_114603) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_05_07_163432) do
     t.bigint "guild_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "connection", default: false
     t.index ["guild_id"], name: "index_guild_members_on_guild_id"
     t.index ["user_id", "guild_id"], name: "index_guild_members_on_user_id_and_guild_id", unique: true
     t.index ["user_id"], name: "index_guild_members_on_user_id"

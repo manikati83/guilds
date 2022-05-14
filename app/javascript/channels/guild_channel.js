@@ -38,6 +38,13 @@ consumer.subscriptions.create({ channel: "GuildChannel", guild_id: guild_id}, {
           join_user.classList.add('online')
         }
       }
+    }else if (data['out_user_id']) {
+      if (guild_id == data['guild_id']){
+        const out_user = document.getElementById(data['out_user_id']);
+        if (out_user.children[1].classList.contains("join")){
+          out_user.children[1].classList.remove('join');
+        }
+      }
     }else if (guild_id == data['guild_id']) {
       const message = data["message"].replace(/(\r\n|\n|\r)/gm, '<br>')
       const sentence = '<div class="media chat-media"><div class="media-body">\
