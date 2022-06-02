@@ -1,0 +1,42 @@
+<div id="home">
+  
+  <div class="slide">
+    <h3>人気ギャラリー</h3>
+    <% @galleries.each_with_index do |gallery, i| %>
+      <%= image_tag gallery.photo.url, class: 'gallery-photo' %>
+    <% end %>
+  </div>
+  
+  <div id="home-btns">
+    <div class="signup-button">
+      <%= link_to "新規登録", signup_path, class: 'btn btn-success' %>
+    </div>
+    <div class="login-button">
+      <%= link_to "ログイン", login_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+  
+  <div id="home-blogs-wrap">
+    <h3>人気ブログ</h3>
+    <div id="home-blogs">
+      <% @blogs.each do |blog| %>
+        <div class="home-blog">
+          <div class="home-blog-title">
+            <h4><%= link_to blog.title, blog_path(id: blog.id), class: 'guild-name', 'data-turbolinks': false %></h4>
+          </div>
+          <div class="home-blog-content">
+            <p><%= strip_tags(blog.content.to_s).gsub(/[\n]/,"").strip.truncate(80) %></p>
+          </div>
+          <div class="home-blog-footer">
+            <%= blog.how_long_ago %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div id="home-guilds">
+    <h3>人気ギルド</h3>
+    <%= render 'guilds/guilds', guilds: @guilds %>
+  </div>
+</div>

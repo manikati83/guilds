@@ -8,25 +8,30 @@
       <div id="menu_btn" class="openbtn border">
           <i class="fa fa-list fa-2x"></i>&nbsp;<h5>Blog List</h5>
       </div>
-      
-      <div class="build-btn">
-        <h3><%= link_to 'ブログ作成', new_blog_path(guild_id: @guild.id), class: 'btn btn-success' %></h3>
-      </div>
+      <% if logged_in? %>
+        <% if @guild.members.include?(current_user) %>
+          <div class="build-btn">
+            <h3><%= link_to 'ブログ作成', new_blog_path(guild_id: @guild.id), class: 'btn btn-success' %></h3>
+          </div>
+        <% end %>
+      <% end %>
       
       <div class="blog-show-wrap">
         <div class="blog-header p-3 border-bottom">
-          <% if @blog.user.id == current_user.id %>
-            <div class="dropdown">
-              <button class="dropdown__btn" id="dropdown__btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="64"/><circle cx="256" cy="448" r="64"/><circle cx="256" cy="64" r="64"/></svg>
-              </button>
-              <div class="dropdown__body">
-                <ul class="dropdown__list">
-                  <li class="dropdown__item"><%= link_to '編集', edit_blog_path(@blog, guild_id: @blog.guild.id), class: 'dropdown__item-link' %></li>
-                  <li class="dropdown__item"><%= link_to '削除', @blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown__item-link' %></li>
-                </ul>
+          <% if logged_in? %>
+            <% if @blog.user.id == current_user.id %>
+              <div class="dropdown">
+                <button class="dropdown__btn" id="dropdown__btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="64"/><circle cx="256" cy="448" r="64"/><circle cx="256" cy="64" r="64"/></svg>
+                </button>
+                <div class="dropdown__body">
+                  <ul class="dropdown__list">
+                    <li class="dropdown__item"><%= link_to '編集', edit_blog_path(@blog, guild_id: @blog.guild.id), class: 'dropdown__item-link' %></li>
+                    <li class="dropdown__item"><%= link_to '削除', @blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'dropdown__item-link' %></li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
           <p class="mb-0">投稿者&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= @blog.user.name %></p>
           <p>投稿日&nbsp;:&nbsp;<%= @blog.created_at %></p>
@@ -38,6 +43,18 @@
         </div>
         <div class="blog-show-content mt-5">
           <p><%= @blog.content %></p>
+        </div>
+        
+        <div>
+          <% if logged_in? %>
+            <% if current_user.favorite_blog?(@blog) %>
+              <span class="favorite-blog"><%= link_to("いいねしました。", favorite_blog_path(blog_id: @blog.id), {method: :"delete"}) %></span><%= @blog.favorite_blogs.count %>
+            <% else %>
+              <span class="no-favorite-blog"><%= link_to("いいね", favorite_blogs_path(blog_id: @blog.id), {method: :"post"}) %><%= @blog.favorite_blogs.count %></span>
+            <% end %>
+          <% else %>
+            <span class="goot-blog">いいね<%= @blog.favorite_blogs.count %></span>
+          <% end %>
         </div>
       </div>
       

@@ -2,7 +2,11 @@
 
 <div id="gallery-nav">
   <p>投稿数&nbsp;:&nbsp;<%= @galleries.count %></p>
-  <%= link_to "投稿する", new_gallery_path(guild_id: @guild.id), class: "btn btn-success" %>
+  <% if logged_in? %>
+    <% if @guild.members.include?(current_user) %>
+      <%= link_to "投稿する", new_gallery_path(guild_id: @guild.id), class: "btn btn-success" %>
+    <% end %>
+  <% end %>
 </div>
 
 

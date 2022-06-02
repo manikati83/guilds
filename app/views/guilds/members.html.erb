@@ -6,6 +6,7 @@
     <ul class="nav nav-tabs nav-justified mb-3">
       <li class="nav-item"><a href="<%= members_guild_path %>" class="nav-link <%= 'active' if current_page?(members_guild_path) %>">ギルドメンバー <span class="badge badge-secondary"><%= @members.count %></span></a></li>
       <li class="nav-item"><a href="<%= approval_members_guild_path %>" class="nav-link <%= 'active' if current_page?(approval_members_guild_path) %>">承認待ちユーザー <span class="badge badge-secondary"><%= @approvals.count %></span></a></li>
+      <li class="nav-item"><a href="<%= news_guild_path %>" class="nav-link <%= 'active' if current_page?(news_guild_path) %>">お知らせ <span class="badge badge-secondary"><%= @news.count %></span></a></li>
     </ul>
   <% end %>
   
@@ -20,6 +21,11 @@
             <p class="text-dark">オフライン</p>
           <% end %>
           <p>ログイン履歴：<%= member.user.how_long_ago %></p>
+          <% if member.user.id == current_user.id and @guild.user_id != current_user.id %>
+            <div>
+              <%= link_to("退会する", guild_member_path(guild_id: @guild.id), {method: :"delete"}) %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

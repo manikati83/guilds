@@ -27,6 +27,10 @@ class Guild < ApplicationRecord
   
   has_many :galleries
   
+  has_many :quests
+  
+  has_many :notifications
+  
   
   after_create do
     guild = Guild.find_by(id: id)
@@ -58,8 +62,12 @@ class Guild < ApplicationRecord
     end
   end
   
-  def del_member(uesr)
+  def del_member(user)
     self.guild_members.find_by(user_id: user.id).destroy
+  end
+  
+  def add_notification(user, content)
+    self.notifications.find_or_create_by(user_id: user.id, content: content)
   end
   
   def how_long_ago

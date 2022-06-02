@@ -14,6 +14,17 @@
           <p><%= safe_join(@gallery.content.split("\n"),tag(:br)) %></p>
         </div>
       <% end %>
+      <div class="gallery-favorite">
+        <% if logged_in? %>
+          <% if current_user.favorite_gallery?(@gallery) %>
+            <span class="favorite-blog"><%= link_to("いいねしました。", favorite_gallery_path(gallery_id: @gallery.id), {method: :"delete"}) %></span><span class="gallery-favorite-count"><%= @gallery.favorite_galleries.count %></span>
+          <% else %>
+            <span class="no-favorite-blog"><%= link_to("いいね", favorite_galleries_path(gallery_id: @gallery.id), {method: :"post"}) %></span><span class="gallery-favorite-count"><%= @gallery.favorite_galleries.count %></span>
+          <% end %>
+        <% else %>
+          <span class="goot-blog">いいね</span><span class="gallery-favorite-count"><%= @gallery.favorite_galleries.count %></span>
+        <% end %>
+      </div>
       <div id="gallery-show-content-footer">
         <h5><%= @gallery.created_format %><h5></h5>
       </div>

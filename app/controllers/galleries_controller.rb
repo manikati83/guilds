@@ -2,6 +2,9 @@ class GalleriesController < ApplicationController
   def new
     @guild = Guild.find(params[:guild_id])
     @gallery = @guild.galleries.build
+    unless @guild.members.include?(current_user)
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def show
@@ -13,12 +16,17 @@ class GalleriesController < ApplicationController
     @guild = Guild.find(params[:guild_id])
     @gallery = current_user.galleries.build(gallery_params)
     @gallery.guild_id = @guild.id
-    if @gallery.save
-      flash[:success] = "写真を投稿しました。"
-      redirect_to gallery_guild_path(id: @guild.id)
+    if @guild.members.include?(current_user)
+      if @gallery.save
+        flash[:success] = "写真を投稿しました。"
+        redirect_to gallery_guild_path(id: @guild.id)
+      else
+        flash.now[:danger] = "写真を投稿できませんでした。"
+        render :new
+      end
     else
-      flash.now[:danger] = "写真を投稿できませんでした。"
-      render :new
+      flash[:danger] = "投稿がキャンセルされました。"
+      redirect_back(fallback_location: root_path)
     end
   end
 

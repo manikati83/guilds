@@ -1,0 +1,12 @@
+<%= render 'guilds/navbar' %>
+
+<div class="container">
+  <ul class="nav nav-tabs nav-justified mb-3">
+    <li class="nav-item"><a href="<%= quest_guild_path(id: @guild.id) %>" class="nav-link <%= 'active' if current_page?(quest_guild_path) %>">依頼 <span class="badge badge-secondary"><%= @quests.count %></span></a></li>
+    <li class="nav-item"><a href="<%= questing_guild_path(id: @guild.id) %>" class="nav-link <%= 'active' if current_page?(questing_guild_path) %>">進行中 <span class="badge badge-secondary"><%= @questing.count %></span></a></li>
+    <li class="nav-item"><a href="<%= quested_guild_path %>" class="nav-link <%= 'active' if current_page?(quested_guild_path) %>">達成 <span class="badge badge-secondary"><%= @quested.count %></span></a></li>
+  </ul>
+  
+  <h3>依頼</h3>
+  <%= render 'guilds/quests', quests: @questing %>
+</div>

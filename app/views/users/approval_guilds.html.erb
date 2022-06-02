@@ -17,7 +17,7 @@
       </div>
     </div>
     
-    <div class="col-md-8 user-page-right">
+    <div class="col-md-9 user-page-right">
       <div class="user-page-blog">
         <h3>投稿したブログ</h3>
         <div class="box">
@@ -36,6 +36,30 @@
           <% end %>
         </div>
       </div>
+      
+      <% if current_user.id == @user.id %>
+        <div class="user-page-quests">
+          <ul class="nav nav-tabs nav-justified mb-3">
+            <li class="nav-item"><a href="<%= user_path %>" class="nav-link <%= 'active' if current_page?(user_path) %>">発注依頼</a></li>
+            <li class="nav-item"><a href="<%= offer_questing_user_path %>" class="nav-link <%= 'active' if current_page?(offer_questing_user_path) %>">受注依頼</a></li>
+          </ul>
+          <ul class="user-page-quests-menu">
+            <li><%= link_to '依頼', user_path, class: "user-page-select-menu" %></li>
+            <li><%= link_to '進行中', questing_user_path, class: "user-page-noselect-menu" %></li>
+            <li><%= link_to '完了', quested_user_path, class: "user-page-noselect-menu" %></li>
+          </ul>
+          <div class="user-page-quests-list">
+            <% @quests.each do |quest| %>
+              <div class="user-page-quests-container">
+                <h3><%= link_to quest.title, quest_path(id: quest.id) %></h3>
+                <p>依頼ギルド&nbsp;:&nbsp;<%= link_to quest.guild.name, guild_path(id: quest.guild.id) %></p>
+              </div>
+            <% end %>
+            <%= paginate @quests %>
+          </div>
+        </div>
+      <% end %>
+      
       <div class="user-page-guilds">
         <ul class="user-page-guilds-menu">
           <li><%= link_to '加入', user_path(id: @user.id), class: "user-page-noselect-menu" %></li>

@@ -1,0 +1,89 @@
+<div class="user-page-wrap">
+  <div class="row">
+    
+    <div class="col-md-3 user-page-left">
+      <div class="user-page-left-profile">
+        <div class="user-page-profile">
+          <img class="user-page-icon" src="<%= gravatar_url(@user, { size: 150 }) %>" alt="">
+          <h5><%= @user.name %></h5>
+        </div>
+        <div class="user-page-content">
+          <p>加入：&nbsp;<%= @user.join_guilds.count %></p>
+          <p>承認待ち：&nbsp;<%= @user.approval_guilds.count %></p>
+        </div>
+      </div>
+      <div class="user-page-left-notifi">
+        
+      </div>
+    </div>
+    
+    <div class="col-md-9 user-page-right">
+      <div class="user-page-blog">
+        <h3>投稿したブログ</h3>
+        <div class="user-box">
+          <% @blogs.each do |blog| %>
+            <div class="user-boxlist-blog">
+              <div class="boxlist-title">
+                <h4><%= link_to blog.title, blog_path(id: blog.id), class: 'guild-name', 'data-turbolinks': false %></h4>
+              </div>
+              <div class="user-boxlist-content">
+                <p><%= strip_tags(blog.content.to_s).gsub(/[\n]/,"").strip.truncate(80) %></p>
+              </div>
+              <div class="user-bloglist-footer">
+                <%= blog.how_long_ago %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <% if current_user.id == @user.id %>
+        <div class="user-page-quests">
+          <ul class="nav nav-tabs nav-justified mb-3">
+            <li class="nav-item"><a href="<%= user_path %>" class="nav-link <%= 'active' if current_page?(questing_user_path) %>">発注依頼</a></li>
+            <li class="nav-item"><a href="<%= offer_questing_user_path %>" class="nav-link <%= 'active' if current_page?(offer_questing_user_path) %>">受注依頼</a></li>
+          </ul>
+          <ul class="user-page-quests-menu">
+            <li><%= link_to '依頼', user_path, class: "user-page-noselect-menu" %></li>
+            <li><%= link_to '進行中', questing_user_path, class: "user-page-select-menu" %></li>
+            <li><%= link_to '完了', quested_user_path, class: "user-page-noselect-menu" %></li>
+          </ul>
+          <div class="user-page-quests-list">
+            <% @quests.each do |quest| %>
+              <div class="user-page-quests-container">
+                <h3><%= link_to quest.title, quest_path(id: quest.id) %></h3>
+                <p>依頼ギルド&nbsp;:&nbsp;<%= link_to quest.guild.name, guild_path(id: quest.guild.id) %></p>
+              </div>
+            <% end %>
+            <%= paginate @quests %>
+          </div>
+        </div>
+      <% end %>
+      
+      <div class="user-page-guilds">
+        <ul class="user-page-guilds-menu">
+          <li><%= link_to '加入', user_path(id: @user.id), class: "user-page-select-menu" %></li>
+          <li><%= link_to 'お気に入り', favorite_guilds_user_path(id: @user), class: "user-page-noselect-menu" %></li>
+          <% if current_user.id == @user.id %>
+            <li><%= link_to '承認待ち', approval_guilds_user_path(id: @user), class: "user-page-noselect-menu" %></li>
+          <% end %>
+        </ul>
+        <div class="user-page-guilds-list">
+          <% @guilds.each do |guild| %>
+            <div class="user-page-guilds-container">
+              <h3><%= link_to guild.name, guild_path(id: guild.id) %></h3>
+              <ul class="mb-2"><i class="fa fa-tag"></i>
+                <% guild.hashtags.each do |tag| %>
+                  <li class="mr-1" style="display: inline-block; font-family: Arial;"><%= link_to tag.hashname + ",", tags_path(id: tag.id) %></li>
+                <% end %>
+              </ul>
+              <p><i class="fa fa-chess-king master-icon"></i>ギルドマスター&nbsp;:&nbsp;<img class="" src="<%= gravatar_url(guild.user, { size: 25 }) %>" alt="">&nbsp;<%= guild.user.name %></p>
+              <p><i class="fa fa-user"></i>メンバー&nbsp;:&nbsp;<%= guild.members.count %>/<%= guild.limit_member %></p>
+            </div>
+          <% end %>
+          <%= paginate @guilds %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

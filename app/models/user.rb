@@ -21,7 +21,23 @@ class User < ApplicationRecord
   has_many :favorite_guilds, dependent: :destroy
   has_many :favorites, through: :favorite_guilds, source: :guild
   
+  has_many :favorite_blogs, dependent: :destroy
+  has_many :good_blogs, through: :favorite_blogs, source: :blog
+  
+  has_many :favorite_galleries, dependent: :destroy
+  has_many :good_galleries, through: :favorite_galleries, source: :gallery
+  
   has_many :galleries
+  
+  has_many :quests
+  has_many :order_quest, through: :quest, source: :quest
+  
+  has_many :quest_members
+  has_many :join_quest, through: :quest_members, source: :quest
+  
+  has_many :quest_messages
+  
+  has_many :notifications
   
   
   def favorite(guild)
@@ -36,6 +52,43 @@ class User < ApplicationRecord
   def favorite?(guild)
     self.favorites.include?(guild)
   end
+  
+  
+  def favorite_blog(blog)
+    self.favorite_blogs.find_or_create_by(blog_id: blog.id)
+  end
+  
+  def unfavorite_blog(blog)
+    favorite_blog = self.favorite_blogs.find_by(blog_id: blog.id)
+    favorite_blog.destroy if favorite_blog
+  end
+  
+  def favorite_blog?(blog)
+    self.good_blogs.include?(blog)
+  end
+  
+  
+  def favorite_gallery(gallery)
+    self.favorite_galleries.find_or_create_by(gallery_id: gallery.id)
+  end
+  
+  def unfavorite_gallery(gallery)
+    favorite_gallery = self.favorite_galleries.find_by(gallery_id: gallery.id)
+    favorite_gallery.destroy if favorite_gallery
+  end
+  
+  def favorite_gallery?(gallery)
+    self.good_galleries.include?(gallery)
+  end
+  
+
+  def quest_leader?(quest)
+    member = self.quest_members.where(quest_id: quest.id).first
+    if member
+      member.leader_id
+    end
+  end
+    
   
   def how_long_ago
     if (Time.now - self.online_at) <= 60 * 60

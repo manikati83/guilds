@@ -16,6 +16,7 @@ class ApprovalsController < ApplicationController
       approval.guild_id = @guild.id
       if approval.save
         flash[:success] = '加入申請を送りました。'
+        @guild.add_notification(@guild.user, '「' + @guild.name + '」に' + current_user.name + 'さんから加入申請が届きました。')
         redirect_to @guild
       else
         flash.now[:danger] = '加入申請を送れませんでした。'

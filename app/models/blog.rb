@@ -5,8 +5,12 @@ class Blog < ApplicationRecord
   belongs_to :user
   belongs_to :guild
   belongs_to :guild_blog_tag, optional: true
+  belongs_to :guild_blog_tag, dependent: :destroy
   
   has_rich_text :content
+  
+  has_many :favorite_blogs, dependent: :destroy
+  has_many :good_users, through: :favorite_blogs, source: :user
   
   
   def how_long_ago

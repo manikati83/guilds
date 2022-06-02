@@ -105,6 +105,7 @@
   width: auto;
   height: 500px;
   border-radius: 10px;
+  object-fit: cover
 }
 
 #gallery-show-content p{
@@ -117,4 +118,13 @@
 
 #gallery-show-content-footer h5{
   font-size: 1em;
+}
+
+.gallery-favorite{
+  text-align: right;
+  padding-right: 5%;
+}
+
+.gallery-favorite-count{
+  color: #DDD;
 }

@@ -6,6 +6,9 @@ class Gallery < ApplicationRecord
   belongs_to :user
   belongs_to :guild
   
+  has_many :favorite_galleries, dependent: :destroy
+  has_many :good_users, through: :favorite_galleries, source: :user
+  
   mount_uploader :photo, PhotoUploader
   
   def created_format

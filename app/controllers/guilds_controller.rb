@@ -1,5 +1,5 @@
 class GuildsController < ApplicationController
-  before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:new, :create, :edit, :update]
   before_action :set_q
   
   def index
@@ -70,17 +70,60 @@ class GuildsController < ApplicationController
     @guild = Guild.find(params[:id])
     @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
     @approvals = @guild.approvals.order(id: :desc).page(params[:page]).per(25)
+    @news = @guild.guild_news.order(id: :desc).page(params[:page]).per(25)
   end
   
   def approval_members
     @guild = Guild.find(params[:id])
     @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
     @approvals = @guild.approvals.order(id: :desc).page(params[:page]).per(25)
+    @news = @guild.guild_news.order(id: :desc).page(params[:page]).per(25)
   end
   
   def gallery
     @guild = Guild.find(params[:id])
     @galleries = @guild.galleries.order(id: :desc).page(params[:page]).per(25)
+  end
+  
+  def news
+    @guild = Guild.find(params[:id])
+    @news = @guild.guild_news.order(id: :desc).page(params[:page]).per(25)
+    @members = @guild.guild_members.all.order(id: :asc).page(params[:page]).per(25)
+    @approvals = @guild.approvals.order(id: :desc).page(params[:page]).per(25)
+    @new_news = @guild.guild_news.build
+  end
+  
+  def quest
+    @guild = Guild.find(params[:id])
+    if @guild.members.include?(current_user)
+      @quests = @guild.quests.where(status: 0).order(id: :desc).page(params[:page]).per(25)
+      @questing = @guild.quests.where(status: 1).order(id: :desc).page(params[:page]).per(25)
+      @quested = @guild.quests.where(status: 2).order(id: :desc).page(params[:page]).per(25)
+    else
+      redirect_to @guild
+    end
+  end
+  
+  def questing
+    @guild = Guild.find(params[:id])
+    if @guild.members.include?(current_user)
+      @quests = @guild.quests.where(status: 0).order(id: :desc).page(params[:page]).per(25)
+      @questing = @guild.quests.where(status: 1).order(id: :desc).page(params[:page]).per(25)
+      @quested = @guild.quests.where(status: 2).order(id: :desc).page(params[:page]).per(25)
+    else
+      redirect_to @guild
+    end
+  end
+  
+  def quested
+    @guild = Guild.find(params[:id])
+    if @guild.members.include?(current_user)
+      @quests = @guild.quests.where(status: 0).order(id: :desc).page(params[:page]).per(25)
+      @questing = @guild.quests.where(status: 1).order(id: :desc).page(params[:page]).per(25)
+      @quested = @guild.quests.where(status: 2).order(id: :desc).page(params[:page]).per(25)
+    else
+      redirect_to @guild
+    end
   end
   
   

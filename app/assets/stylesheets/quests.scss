@@ -1,0 +1,288 @@
+// Place all the styles related to the quests controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+/*index */
+.quest-content{
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.quest-content span{
+  margin-left: 20px;
+}
+
+.quest-info{
+  padding-left: 20px;
+}
+
+.quest-title a{
+  color: #666;
+  font-size: 1.2em;
+}
+
+.quest-members-list{
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.quest-members-list li{
+  margin-right: 10px;
+}
+
+
+/*show */
+.quest-show-wrap{
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 10px;
+}
+
+.quest-show-wrap h5{
+  text-align: center;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-color: #999;
+  padding: 10px 0;
+}
+
+.quest-show-top span{
+  margin-left: 20px;
+}
+
+.quest-show-title{
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+
+.quest-show-content{
+  padding: 0 10px;
+}
+
+.quest-show-reception{
+  background-color: #FFF;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.quest-orders-member{
+  margin: 20px 10% 10px 10%;
+  border-radius: 10px;
+  background-color: #886aff;
+  color: #FFF;
+}
+
+.quest-orders-member h5{
+  text-align: center;
+  font-size: 1.2em;
+  padding: 10px 0;
+  background-color: #999;
+  border-radius: 10px 10px 0 0;
+}
+
+.quest-show-join a{
+  color: #FFF;
+}
+
+.quest-show-join-user{
+  padding: 10px;
+  border-bottom: 2px solid;
+  border-color: #6e53d5;
+}
+
+.quest-show-join-space{
+  height: 50px;
+}
+
+.quest-orders-join{
+  text-align: right;
+  background-color: #999;
+  border-radius: 0 0 10px 10px;
+}
+
+.quest-member{
+  margin-left: 25px;
+}
+
+.quest-orders-join .quest-submit{
+  margin: 10px;
+}
+
+.quest-orders-start{
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid;
+  border-color: #999;
+}
+
+.quest-orders-start input{
+  border-radius: 30px;
+}
+
+.quest-submit{
+  border-radius: 30px;
+}
+
+
+#quest-nav {
+  overflow-x: auto;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #e3e3e3;
+}
+
+#quest-nav::-webkit-scrollbar {
+  display: none;
+ }
+
+#quest-nav ul {
+  display: flex;
+  padding: 12px;
+  width: 100%;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+#quest-nav li{
+  text-align: center;
+  margin-right: 20px;
+}
+
+.menu{
+  text-decoration: none;
+  color: #FFF;
+  font-size: 1.3em;
+}
+
+#quest-nav ul > li {
+  white-space: nowrap;
+}
+
+.quest-nav-member{
+  padding-top: 5px;
+}
+
+.quest-nav{
+  width: 100%;
+}
+
+.quest-nav a{
+  color: #666;
+}
+
+
+
+
+#quest-message{
+  overflow: auto;
+  padding: 20px;
+  width: 100%;
+  height: 400px;
+  background-color: #FFF;
+  text-align: right;
+  font-size: 14px;
+}
+
+#quest-message::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#quest-message::-webkit-scrollbar-thumb {
+  background: #ff9802;
+  border-radius: 5px;
+}
+
+#quest-message::-webkit-scrollbar-track {
+  background: #ffcc80;
+  border-radius: 5px;
+}
+
+/*依頼者 */
+.quest-client-user{
+  text-align: left;
+}
+
+.balloon6 {
+  width: 100%;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.balloon6 .chatting {
+  width: 100%;
+  text-align: left;
+}
+
+.says {
+  display: inline-block;
+  position: relative; 
+  margin: 0 0 0 30px;
+  padding: 10px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #edf1ee;
+}
+
+.says:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px; 
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #edf1ee;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.messages-other {
+  margin: 0;
+  padding: 0;
+}
+
+/*ギルドメンバー*/
+.quest-member-message-wrap {
+  margin: 10px 0;
+}
+
+
+.quest-member-message-wrap .quest-member-message {
+  display: inline-block;
+  position: relative; 
+  margin: 0 10px 0 0;
+  padding: 8px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #d1c4e9;
+  text-align: left;
+}
+
+.quest-member-message-wrap .quest-member-message:after {
+  content: "";
+  position: absolute;
+  top: 3px; 
+  right: -19px;
+  border: 8px solid transparent;
+  border-left: 18px solid #d1c4e9;
+  -webkit-transform: rotate(-35deg);
+  transform: rotate(-35deg);
+}
+
+
+.quest-clear{
+  text-align: center;
+  margin: 20px 0;
+}
+
+.quest-clear-content{
+  padding: 20px;
+  background-color: #FFF;
+}

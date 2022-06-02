@@ -1,0 +1,160 @@
+<%= render 'guilds/navbar' %>
+
+<div class="container">
+  <div class="quest-show-wrap">
+    <div class="quest-show-top">
+      <img class="user-icon" src="<%= gravatar_url(@quest.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to @quest.user.name, user_path(id: @quest.user.id) %><span><%= @quest.how_long_ago %></span>
+      <h3 class="quest-show-title"><%= @quest.title %></h3>
+    </div>
+    <h5>依頼内容</h5>
+    <div class="quest-show-content">
+      <p><%= safe_join(@quest.content.split("\n"),tag(:br)) %></p>
+    </div>
+    <% if @quest.status == 1 %>
+      <% if current_user.quest_leader?(@quest) %>
+        <div class="quest-orders-start">
+          <%= form_with(model: @quest, local: true) do |f| %>
+            <%= f.submit '依頼を完了する', class: 'btn btn-success' %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  
+    
+      <% if @quest.status == 0 and @guild.members.include?(current_user) %>
+      <div class="quest-show-reception">
+        <h3>受注受付</h3>
+        <div class="quest-orders-member">
+          <h5>参加者</h5>
+          <div class="quest-show-join">
+            <% @quest_members.each do |member| %>
+              <div class="quest-show-join-user">
+                <% if member.user.quest_leader?(@quest) %>
+                  <i class="fa fa-flag fa-lg"></i>&nbsp;<img class="user-icon quest-leader" src="<%= gravatar_url(member.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to member.user.name, user_path(id: member.user.id) %>
+                <% else %>
+                  <img class="user-icon quest-member" src="<%= gravatar_url(member.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to member.user.name, user_path(id: member.user.id) %>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="quest-show-join-space"></div>
+          </div>
+      
+      
+        <div id="quest-orders">
+          <div class="quest-orders-join">
+            <% if @quest.members.empty? %><!-- 受注者がいない場合 !-->
+              <%= form_with(model: @quest.quest_members.build, local: true) do |f| %>
+                <%= hidden_field_tag :quest_id, @quest.id %>
+                <%= f.submit '受注する', class: 'btn btn-success quest-submit' %>
+              <% end %>
+            <% else %><!-- 受注者がいる場合 !-->
+              <% if @quest.members.include?(current_user) %>
+                <%= form_with(model: @quest.quest_members.find_by(user_id: current_user.id), local: true, method: :delete) do |f| %>
+                  <%= hidden_field_tag :quest_id, @quest.id %>
+                  <%= f.submit '参加を取り消す', class: 'btn btn-danger quest-submit' %>
+                <% end %>
+              <% else %>
+                <%= form_with(model: @quest.quest_members.build, local: true) do |f| %>
+                  <%= hidden_field_tag :quest_id, @quest.id %>
+                  <%= f.submit '参加する', class: 'btn btn-success quest-submit' %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      
+      <% if current_user.quest_leader?(@quest) %>
+        <div class="quest-orders-start">
+          <%= form_with(model: @quest, local: true) do |f| %>
+            <%= f.submit '依頼を開始する', class: 'btn btn-success' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  
+  <% elsif @quest.status == 1 and (@quest.user_id == current_user.id or @quest.members.include?(current_user)) %>
+    
+    <div class="quest-message-area">
+      <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item"><a href="<%= quest_path(id: @quest.id) %>" class="nav-link <%= 'active' if current_page?(quest_path) %>">取引チャット </a></li>
+        <% if current_user != @quest.user %>
+          <li class="nav-item"><a href="<%= member_chat_quest_path(id: @quest.id) %>" class="nav-link <%= 'active' if current_page?(member_chat_quest_path) %>">メンバーチャット </a></li>
+        <% end %>
+      </ul>
+
+      <nav id="quest-nav">
+        <ul class="quest-nav">
+          <li class="quest-nav-member">参加メンバー</li>
+          <% @quest.members.each do |member| %>
+            <li><img class="user-icon" src="<%= gravatar_url(member, { size: 30 }) %>" alt="">&nbsp;<%= link_to member.name, user_path(id: member.id), class: "menu quest-menu-users" %></li>
+          <% end %>
+        </ul>
+      </nav>
+        <div id="quest-message">
+          <% @messages.each do |message| %>
+            <% if message.user.id == @quest.user_id %>
+              <div class="quest-client-wrap">
+                <div class="quest-client-user">
+                  <img class="user-icon" src="<%= gravatar_url(message.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to message.user.name, user_path(id: message.user.id) %>
+                </div>
+              </div>
+              
+              <div class="balloon6">
+                <div class="chatting">
+                  <div class="says">
+                    <div class="message-other">
+                      <p><%= safe_join(message.content.split("\n"),tag(:br)) %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+            <div><img class="user-icon" src="<%= gravatar_url(message.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to message.user.name, user_path(id: message.user.id) %></div>
+              <div class="quest-member-message-wrap">
+                <div class="quest-member-message">
+                  <p><%= safe_join(message.content.split("\n"),tag(:br)) %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    </div>
+    <%= form_with(model: @new_message) do |f| %>
+      <div id="chat-text-area-group" class="form-group">
+         <%= f.text_area :content, id: 'chat-text-area', rows: 3 %>
+         <div class="chat-submit-btn">
+            <%= f.button :type => "submit", id: 'submit-btn', style: 'border-style: none;' do %>
+             <a class="btn"><i class="fa fa-paper-plane fa-lg"></i>&nbsp;<span>送信</span></a>
+            <% end %>
+         </div>
+      </div>
+    <% end %>
+    
+  <% elsif @quest.status == 2 %>
+    <h3 class="quest-clear">依頼完了</h3>
+    <% if @quest.user_id == current_user.id and @quest.quest_messages.where(status: 1).empty? %>
+      <h5>お礼のメッセージを送りましょう</h5>
+      <%= form_with(model: @new_message, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 3 %>
+        </div>
+        <%= f.submit '送信', class: 'btn btn-primary' %>
+      <% end %>
+    <% elsif !@quest.quest_messages.where(status: 1).empty? %>
+      <div class="quest-clear-content">
+        <img class="user-icon" src="<%= gravatar_url(@quest.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to @quest.user.name, user_path(id: @quest.user.id) %>
+        <p><%= safe_join(@quest.quest_messages.where(status: 1).first.content.split("\n"),tag(:br)) %></p>
+      </div>
+    <% end %>
+  <% end %>
+  
+</div>
+
+
+<script>
+  var list;
+  list = document.getElementById('quest-message');
+  list.scrollTo(0, list.scrollHeight);
+</script>

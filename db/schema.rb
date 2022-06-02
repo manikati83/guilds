@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_14_114603) do
+ActiveRecord::Schema.define(version: 2022_06_01_114051) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -64,6 +64,26 @@ ActiveRecord::Schema.define(version: 2022_05_14_114603) do
     t.index ["guild_blog_tag_id"], name: "index_blogs_on_guild_blog_tag_id"
     t.index ["guild_id"], name: "index_blogs_on_guild_id"
     t.index ["user_id"], name: "index_blogs_on_user_id"
+  end
+
+  create_table "favorite_blogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "blog_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blog_id"], name: "index_favorite_blogs_on_blog_id"
+    t.index ["user_id", "blog_id"], name: "index_favorite_blogs_on_user_id_and_blog_id", unique: true
+    t.index ["user_id"], name: "index_favorite_blogs_on_user_id"
+  end
+
+  create_table "favorite_galleries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "gallery_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["gallery_id"], name: "index_favorite_galleries_on_gallery_id"
+    t.index ["user_id", "gallery_id"], name: "index_favorite_galleries_on_user_id_and_gallery_id", unique: true
+    t.index ["user_id"], name: "index_favorite_galleries_on_user_id"
   end
 
   create_table "favorite_guilds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -154,6 +174,52 @@ ActiveRecord::Schema.define(version: 2022_05_14_114603) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "guild_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guild_id"], name: "index_notifications_on_guild_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "quest_members", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "quest_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "leader_id", default: false, null: false
+    t.index ["leader_id"], name: "index_quest_members_on_leader_id"
+    t.index ["quest_id", "user_id"], name: "index_quest_members_on_quest_id_and_user_id", unique: true
+    t.index ["quest_id"], name: "index_quest_members_on_quest_id"
+    t.index ["user_id"], name: "index_quest_members_on_user_id"
+  end
+
+  create_table "quest_messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "quest_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["quest_id"], name: "index_quest_messages_on_quest_id"
+    t.index ["user_id"], name: "index_quest_messages_on_user_id"
+  end
+
+  create_table "quests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "guild_id", null: false
+    t.string "title"
+    t.text "content"
+    t.string "image"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guild_id"], name: "index_quests_on_guild_id"
+    t.index ["user_id"], name: "index_quests_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -170,6 +236,10 @@ ActiveRecord::Schema.define(version: 2022_05_14_114603) do
   add_foreign_key "blogs", "guild_blog_tags"
   add_foreign_key "blogs", "guilds"
   add_foreign_key "blogs", "users"
+  add_foreign_key "favorite_blogs", "blogs"
+  add_foreign_key "favorite_blogs", "users"
+  add_foreign_key "favorite_galleries", "galleries"
+  add_foreign_key "favorite_galleries", "users"
   add_foreign_key "favorite_guilds", "guilds"
   add_foreign_key "favorite_guilds", "users"
   add_foreign_key "galleries", "guilds"
@@ -183,4 +253,12 @@ ActiveRecord::Schema.define(version: 2022_05_14_114603) do
   add_foreign_key "guilds", "users"
   add_foreign_key "messages", "guilds"
   add_foreign_key "messages", "users"
+  add_foreign_key "notifications", "guilds"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "quest_members", "quests"
+  add_foreign_key "quest_members", "users"
+  add_foreign_key "quest_messages", "quests"
+  add_foreign_key "quest_messages", "users"
+  add_foreign_key "quests", "guilds"
+  add_foreign_key "quests", "users"
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quest: one
+  user: one
+  content: MyText
+  status: MyString
+  integer: MyString
+
+two:
+  quest: two
+  user: two
+  content: MyText
+  status: MyString
+  integer: MyString

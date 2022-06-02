@@ -1,11 +1,13 @@
 <%= render 'guilds/navbar' %>
-<h1><%= @guild.name %>加入申請</h1>
-<%= form_with(model: @approval, local:true) do |f| %>
-  <%= hidden_field_tag :guild_id, @guild.id %>
-  <div class="form-group">
-    <%= f.label :content, '加入理由・アピールポイントを記入してください。' %>
-    <%= f.text_area :content, class: 'form-control', rows: 5 %>
-  </div>
-  <%= f.submit '申請する', class: 'btn btn-success' %>
-<% end %>
-  
+
+<div class="container">
+  <h1><%= @guild.name %>加入申請</h1>
+  <%= form_with(model: @approval, local:true) do |f| %>
+    <%= hidden_field_tag :guild_id, @guild.id %>
+    <div class="form-group">
+      <%= f.label :content, '加入理由・アピールポイントを記入してください。' %>
+      <%= f.text_area :content, class: 'form-control', rows: 5 %>
+    </div>
+    <%= f.submit '申請する', class: 'btn btn-success' %>
+  <% end %>
+</div>

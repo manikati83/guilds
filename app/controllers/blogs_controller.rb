@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:new, :edit, :create, :update, :destroy]
   before_action :set_blog, only: %i[ show edit update destroy ]
 
   # GET /blogs or /blogs.json
@@ -18,6 +18,9 @@ class BlogsController < ApplicationController
   def new
     @blog = Blog.new
     @guild = Guild.find(params[:guild_id])
+    unless @guild.members.include?(current_user)
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   # GET /blogs/1/edit
@@ -31,22 +34,27 @@ class BlogsController < ApplicationController
     @guild = Guild.find(params[:guild_id])
     @blog.guild_id = @guild.id
     
-    if params[:blog][:name] and params[:blog][:guild_blog_tag_id] == ""
-      new_tag = @guild.guild_blog_tags.build(tag_params)
-      if params[:blog][:name] == ""
-        new_tag = @guild.guild_blog_tags.build(name: "untitled")
+    if @guild.members.include?(current_user)
+      if params[:blog][:name] and params[:blog][:guild_blog_tag_id] == ""
+        new_tag = @guild.guild_blog_tags.build(tag_params)
+        if params[:blog][:name] == ""
+          new_tag = @guild.guild_blog_tags.build(name: "untitled")
+        end
+        new_tag.save
+        @blog.guild_blog_tag_id = new_tag.id
       end
-      new_tag.save
-      @blog.guild_blog_tag_id = new_tag.id
-    end
-    respond_to do |format|
-      if @blog.save
-        format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }
-        format.json { render :show, status: :created, location: @blog }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @blog.save
+          format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }
+          format.json { render :show, status: :created, location: @blog }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @blog.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:danger] = "投稿がキャンセルされました。"
+      redirect_back(fallback_location: root_path)
     end
   end
 

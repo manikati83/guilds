@@ -11,7 +11,13 @@
       </div>
       <div>
         <h3 class="heading">承認待ちギルド</h3>
-        <%= render 'guilds/guilds', guilds: @approval_guilds %>
+        <% if @approval_guilds.count == 0 %>
+          <div id="guild-index-approvals">
+            <h5>現在承認待ちのギルドはありません</h5>
+          </div>
+        <% else %>
+          <%= render 'guilds/guilds', guilds: @approval_guilds %>
+        <% end %>
       </div>
       <div>
         <h3 class="heading">加入ギルド</h3>

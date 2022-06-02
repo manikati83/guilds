@@ -14,10 +14,12 @@
         <p>ギルド設立日&nbsp;:&nbsp;<%= @guild.created_format %></p>
         <p>メンバー&nbsp;:&nbsp;<%= @guild.members.count %></p>
         <p>お気に入り&nbsp;:&nbsp;<%= @guild.favorites.count %></p>
-        <% if current_user.favorite?(@guild) %>
-          <span class="favorite"><%= link_to("お気に入り登録済み", favorite_guild_path(guild_id: @guild.id), {method: :"delete"}) %></span>
-        <% else %>
-          <span class="no-favorite"><%= link_to("お気に入り登録", favorite_guilds_path(guild_id: @guild.id), {method: :"post"}) %></span>
+        <% if logged_in? %>
+          <% if current_user.favorite?(@guild) %>
+            <span class="favorite"><%= link_to("お気に入り登録済み", favorite_guild_path(guild_id: @guild.id), {method: :"delete"}) %></span>
+          <% else %>
+            <span class="no-favorite"><%= link_to("お気に入り登録", favorite_guilds_path(guild_id: @guild.id), {method: :"post"}) %></span>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -33,7 +35,9 @@
   <div id="top-newslist">
     <h3 style="display: inline;">お知らせ</h3>
     <% if @guild.user_id == current_user.id %>
-      <p class="add-news" style="font-size: 20px; border-radius: 20px">Add&nbsp;<i class="fa fa-plus"></i></p>
+      <%= link_to news_guild_path do %>
+        <p class="add-news" style="font-size: 20px; border-radius: 20px">Add&nbsp;<i class="fa fa-plus"></i></p>
+      <% end %>
     <% end %>
     <div class="top-newslist">
       <% unless @news.nil? %>

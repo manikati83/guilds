@@ -1,0 +1,39 @@
+<div>
+  <%= render 'guilds/navbar' %>
+</div>
+<div class="container">
+  <% if @guild.members.include?(current_user) %>
+    <ul class="nav nav-tabs nav-justified mb-3">
+      <li class="nav-item"><a href="<%= members_guild_path %>" class="nav-link <%= 'active' if current_page?(members_guild_path) %>">ギルドメンバー <span class="badge badge-secondary"><%= @members.count %></span></a></li>
+      <li class="nav-item"><a href="<%= approval_members_guild_path %>" class="nav-link <%= 'active' if current_page?(approval_members_guild_path) %>">承認待ちユーザー <span class="badge badge-secondary"><%= @approvals.count %></span></a></li>
+      <li class="nav-item"><a href="<%= news_guild_path %>" class="nav-link <%= 'active' if current_page?(news_guild_path) %>">お知らせ <span class="badge badge-secondary"><%= @news.count %></span></a></li>
+    </ul>
+  <% end %>
+  
+  <% if @guild.user == current_user %>
+    <h3>新規お知らせ</h3>
+    <div id="guild-news-create">
+      <%= form_with(model: @new_news, local: true) do |f| %>
+        <%= hidden_field_tag :guild_id, @guild.id %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 5 %>
+        </div>
+        <div id="guild-news-submit">
+          <%= f.submit '作成', class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  
+  <div id="guild-news">
+    <h3>お知らせ</h3>
+    <% @news.each do |news| %>
+      <div class="guild-news-list">
+        <%= news.content %>
+        <div class="guild-news-date">
+          <%= news.how_long_ago %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @news %>
+  </div>

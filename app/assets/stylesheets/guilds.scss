@@ -6,17 +6,19 @@
   color: #FFCC33;
 }
 
+
 .guild-list-box{
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 10px;
-  background-color: #FFF;
   font-family: Georgia;
+  background-color: #FFF;
+  border-radius: 10px;
 }
 
 .guild-list-title a{
   color: #666;
   text-decoration: none;
+  font-size: 0.8em;
 }
 
 .guild-list-content{
@@ -223,6 +225,13 @@
   text-decoration: none;
 }
 
+#guild-index-approvals{
+  background-color: #FFF;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
 
 @media screen and (max-width:1100px){
   #guilds-main{
@@ -420,12 +429,12 @@
 }
  
 .top-newslist::-webkit-scrollbar-thumb {
-  background: #d2b48c; /* ツマミの色 */
+  background: #9a75dd; /* ツマミの色 */
   border-radius: 7px; /* ツマミ両端の丸み */
 }
  
 .top-newslist::-webkit-scrollbar-track {
-  background: #f5deb3; /* トラックの色 */
+  background: #dfceff; /* トラックの色 */
   border-radius: 7px; /* トラック両端の丸み */
 }
 
@@ -458,12 +467,12 @@
 }
  
 .box::-webkit-scrollbar-thumb {
-  background: #d2b48c; /* ツマミの色 */
+  background: #9a75dd; /* ツマミの色 */
   border-radius: 7px; /* ツマミ両端の丸み */
 }
  
 .box::-webkit-scrollbar-track {
-  background: #f5deb3; /* トラックの色 */
+  background: #dfceff; /* トラックの色 */
   border-radius: 7px; /* トラック両端の丸み */
 }
 
@@ -529,6 +538,60 @@
   color: #66FF33;
 }
 
+/*guild/info */
+#guild-news-create{
+  border: 2px solid;
+  border-color: #999;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+#guild-news-create textarea{
+  resize: none;
+}
+
+#guild-news-submit{
+  display: grid;
+  justify-content: right;
+  margin-right: 10px;
+}
+
+#guild-news h3{
+  border-bottom: 2px solid;
+  border-color: #999;
+  margin-bottom: 30px;
+}
+
+.guild-news-list{
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid;
+  border-color: #999;
+}
+
+.guild-news-date{
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.guild-member-join-content{
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 10px;
+}
+
+.guild-member-join-content p{
+  display: block;
+}
+
+.guild-member-join-content form{
+  display: inline;
+}
+
+.guild-member-join-submit{
+  margin-left: 40px;
+}
 
 
 /* guild/blog */
@@ -816,7 +879,7 @@ button:focus{
   }
   
   .side-menu .parent{
-    width: 80%;
+    width: 100%;
   }
   
   .side-menu a{
@@ -828,8 +891,14 @@ button:focus{
     color: #FFF;
   }
   
+  .parent ul{
+    padding-left: 5%;
+  }
+  
   #tag-list{
-    margin-left: 50px;
+    margin-left: 5%;
+    padding: 0;
+    font-size: 0.8em;
   }
 }
 

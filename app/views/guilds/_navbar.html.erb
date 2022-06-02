@@ -2,31 +2,37 @@
   <h1 class="guildpage-name"><%= link_to @guild.name, guild_path(id: @guild.id) %></h1>
   <nav id="nav">
     <ul>
-      <li><i class="fa fa-users fa-lg nav-icon"></i>&nbsp;<%= link_to 'Member', members_guild_path(id: @guild.id), class: 'menu' %></li>
-      <li><i class="fa fa-pen fa-lg nav-icon"></i>&nbsp;<%= link_to 'Blog', blogs_guild_path(id: @guild.id), class: 'menu', 'data-turbolinks': false %></li>
-      <li><i class="fa fa-image fa-lg nav-icon"></i>&nbsp;<%= link_to 'Gallery', gallery_guild_path(id: @guild.id), class: 'menu' %></li>
-      <% if @guild.members.include?(current_user) %>
-        <li><i class="fa fa-scroll fa-lg nav-icon"></i>&nbsp;<%= link_to 'Quest', root_path, class: 'menu' %></li>
-        <li><i class="fa fa-comments fa-lg nav-icon"></i>&nbsp;<%= link_to 'Chat', new_message_path(id: @guild.id), class: 'menu', 'data-turbolinks': false %></li>
-        <% if @guild.user_id == current_user.id %>
-          <li><i class="fa fa-wrench fa-lg nav-icon"></i>&nbsp;<%= link_to 'Setting', edit_guild_path(id: @guild.id), class: 'menu' %></li>
-        <% end %>
-      <% else %>
-        <% if @guild.join_type %>
-          <!-- 依頼ありギルド !-->
-          <li><%= link_to 'ギルドへ依頼', root_path, class: 'menu' %></li>
-          <% if @guild.approval_user?(current_user) %>
-            <li><%= link_to '申請済み', guild_path(id: @guild.id), class: 'menu' %></li>
-          <% else %>
-            <li><%= link_to '加入申請', new_approval_path(id: @guild.id), class: 'menu' %></li>
+      <li><i class="fa fa-info fa-lg nav-icon"></i>&nbsp;<%= link_to 'ギルド情報', members_guild_path(id: @guild.id), class: 'menu' %></li>
+      <li><i class="fa fa-pen fa-lg nav-icon"></i>&nbsp;<%= link_to 'ブログ', blogs_guild_path(id: @guild.id), class: 'menu', 'data-turbolinks': false %></li>
+      <li><i class="fa fa-image fa-lg nav-icon"></i>&nbsp;<%= link_to 'ギャラリー', gallery_guild_path(id: @guild.id), class: 'menu' %></li>
+      <% if logged_in? %>
+        <% if @guild.members.include?(current_user) %>
+          <li><i class="fa fa-scroll fa-lg nav-icon"></i>&nbsp;<%= link_to 'クエスト', quest_guild_path(id: @guild.id), class: 'menu' %></li>
+          <li><i class="fa fa-comments fa-lg nav-icon"></i>&nbsp;<%= link_to 'チャット', new_message_path(id: @guild.id), class: 'menu', 'data-turbolinks': false %></li>
+          <% if @guild.user_id == current_user.id %>
+            <li><i class="fa fa-wrench fa-lg nav-icon"></i>&nbsp;<%= link_to '設定', edit_guild_path(id: @guild.id), class: 'menu' %></li>
           <% end %>
         <% else %>
-          <!-- 依頼なしギルド !-->
-          <li><%= link_to 'ギルドへ依頼', root_path, class: 'menu' %></li>
-          <%= form_with(model: current_user.guild_members.build, local: true) do |f| %>
-            <%= hidden_field_tag :guild_id, @guild.id %>
-            <%= hidden_field_tag :user_id, current_user.id %>
-            <%= f.submit '更新する', class: 'btn btn-primary btn-block' %>
+          <% if @guild.join_type %>
+            <!-- 依頼ありギルド !-->
+            <% if @guild.guild_type %>
+              <li><%= link_to 'ギルドへ依頼', new_quest_path(id: @guild.id), class: 'menu' %></li>
+            <% end %>
+            <% if @guild.approval_user?(current_user) %>
+              <li><%= link_to '申請済み', guild_path(id: @guild.id), class: 'menu' %></li>
+            <% else %>
+              <li><%= link_to '加入申請', new_approval_path(id: @guild.id), class: 'menu' %></li>
+            <% end %>
+          <% else %>
+            <!-- 依頼なしギルド !-->
+            <% if @guild.guild_type %>
+              <li><%= link_to 'ギルドへ依頼', new_quest_path(id: @guild.id), class: 'menu' %></li>
+            <% end %>
+            <%= form_with(model: current_user.guild_members.build, local: true) do |f| %>
+              <%= hidden_field_tag :guild_id, @guild.id %>
+              <%= hidden_field_tag :user_id, current_user.id %>
+              <%= f.submit '加入する', class: 'btn btn-primary btn-block' %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

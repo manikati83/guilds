@@ -7,6 +7,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @blogs = @user.blogs.order(id: :desc).limit(10)
     @guilds = @user.join_guilds.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.quests.where(status: 0).order(id: :desc).page(params[:page]).per(10)
+    if @user == current_user
+      @notifications = current_user.notifications.order(id: :desc).limit(50)
+    end
   end
 
   def new
@@ -29,12 +33,42 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @blogs = @user.blogs.order(id: :desc).limit(10)
     @guilds = @user.favorites.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.quests.where(status: 0).order(id: :desc).page(params[:page]).per(10)
   end
   
   def approval_guilds
     @user = User.find(params[:id])
     @blogs = @user.blogs.order(id: :desc).limit(10)
     @guilds = @user.approval_guilds.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.quests.where(status: 0).order(id: :desc).page(params[:page]).per(10)
+  end
+  
+  def questing
+    @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.join_guilds.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.quests.where(status: 1).order(id: :desc).page(params[:page]).per(10)
+  end
+  
+  def quested
+    @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.join_guilds.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.quests.where(status: 2).order(id: :desc).page(params[:page]).per(10)
+  end
+  
+  def offer_questing
+    @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.join_guilds.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.join_quest.where(status: 1).order(id: :desc).page(params[:page]).per(10)
+  end
+  
+  def offer_quested
+    @user = User.find(params[:id])
+    @blogs = @user.blogs.order(id: :desc).limit(10)
+    @guilds = @user.join_guilds.order(id: :desc).page(params[:page]).per(10)
+    @quests = @user.join_quest.where(status: 2).order(id: :desc).page(params[:page]).per(10)
   end
   
   

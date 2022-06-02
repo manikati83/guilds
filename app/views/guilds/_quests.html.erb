@@ -1,0 +1,14 @@
+<% quests.each do |quest| %>
+  <div class="quest-content">
+    <img class="user-icon" src="<%= gravatar_url(quest.user, { size: 30 }) %>" alt="">&nbsp;<%= quest.user.name %><span><%= quest.how_long_ago %></span>
+    <div class="quest-info">
+      <h5 class="quest-title"><%= link_to quest.title, quest_path(id: quest.id) %></h5>
+      <ul class="quest-members-list">
+        参加者&nbsp;:&nbsp;
+        <% quest.members.each do |member| %>
+          <li><img class="user-icon" src="<%= gravatar_url(member, { size: 30 }) %>" alt="">&nbsp;<%= member.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
