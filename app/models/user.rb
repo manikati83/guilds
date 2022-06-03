@@ -85,7 +85,7 @@ class User < ApplicationRecord
   def quest_leader?(quest)
     member = self.quest_members.where(quest_id: quest.id).first
     if member
-      member.leader_id
+      member.leader
     end
   end
     

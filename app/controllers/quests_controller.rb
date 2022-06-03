@@ -37,7 +37,7 @@ class QuestsController < ApplicationController
   
   def update
     @quest = Quest.find(params[:id])
-    leader = @quest.quest_members.where(leader_id: true).first
+    leader = @quest.quest_members.where(leader: true).first
     if leader.user_id == current_user.id
       if @quest.status == 0
         @quest.update(status: 1)

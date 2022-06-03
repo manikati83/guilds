@@ -3,7 +3,7 @@ class QuestMembersController < ApplicationController
     @quest = Quest.find(params[:quest_id])
     if @quest.guild.members.include?(current_user)
       if @quest.quest_members.empty?
-        current_user.quest_members.find_or_create_by(quest_id: @quest.id, leader_id: true)
+        current_user.quest_members.find_or_create_by(quest_id: @quest.id, leader: true)
         flash[:success] = "クエストを受注しました。"
         redirect_to @quest
       else
@@ -24,7 +24,7 @@ class QuestMembersController < ApplicationController
         join_quest.destroy
         if !@quest.members.empty?
           new_leader = @quest.quest_members.first
-          new_leader.update(leader_id: true)
+          new_leader.update(leader: true)
         end
         flash[:success] = 'クエストの参加を取り消しました。'
         redirect_to @quest
