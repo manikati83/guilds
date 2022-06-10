@@ -1,0 +1,18 @@
+<div class="container timeline">
+    <div id="search">
+      <%= search_form_for(@q, url:timeline_path) do |f| %>
+          <div id="search-box">
+            <%= f.search_field :title_cont, class: 'form-control mr-sm-2 search-textfield', placeholder: "Search" %>
+            <%= f.submit 'Search', class: 'btn btn-outline-primary my-2 my-sm-0 search-submit' %>
+          </div>
+          <div id="search-btn">
+          </div>
+      <% end %>
+    </div>
+    <div class="timeline-count">
+      <p>ブログ数：<%= @blogs.count %>件</p>
+    </div>
+    <div id="blog-wrap">
+      <%= render 'guilds/blog', blogs: @blogs %>
+    </div>
+</div>

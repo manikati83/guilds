@@ -7,14 +7,16 @@
     <% end %>
   </div>
   
-  <div id="home-btns">
-    <div class="signup-button">
-      <%= link_to "新規登録", signup_path, class: 'btn btn-success' %>
+  <% unless logged_in? %>
+    <div id="home-btns">
+      <div class="signup-button">
+        <%= link_to "新規登録", signup_path, class: 'btn btn-success' %>
+      </div>
+      <div class="login-button">
+        <%= link_to "ログイン", login_path, class: 'btn btn-primary' %>
+      </div>
     </div>
-    <div class="login-button">
-      <%= link_to "ログイン", login_path, class: 'btn btn-primary' %>
-    </div>
-  </div>
+  <% end %>
   
   <div id="home-blogs-wrap">
     <h3>人気ブログ</h3>

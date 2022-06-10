@@ -2,35 +2,7 @@
   <div class="row">
     
     <div class="col-md-3 user-page-left">
-      <div class="user-page-left-profile">
-        <div class="user-page-profile">
-          <img class="user-page-icon" src="<%= gravatar_url(@user, { size: 150 }) %>" alt="">
-          <h5><%= @user.name %></h5>
-        </div>
-        <div class="user-page-content">
-          <p>加入：&nbsp;<%= @user.join_guilds.count %></p>
-          <p>承認待ち：&nbsp;<%= @user.approval_guilds.count %></p>
-        </div>
-      </div>
-      <div class="user-page-left-notifi">
-        <div class="top-newslist">
-          <% unless @notifications.nil? %>
-            <% @notifications.each do |notifi| %>
-              <div class="top-newslist-content">
-                <div>
-                  <%= link_to notifi.guild.name, guild_path(id: notifi.guild.id) %>
-                </div>
-                <div class="mb-2">
-                  <%= notifi.content %>
-                </div>
-                <div>
-                  <%= notifi.how_long_ago %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'users/sidebar' %>
     </div>
     
     <div class="col-md-9 user-page-right">

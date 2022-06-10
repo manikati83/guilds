@@ -58,6 +58,8 @@ gem 'actiontext'
 gem 'ransack'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'aws-sdk-s3', require: false
+gem 'fog-aws'
 
 group :production do
   gem 'pg', '>= 0.18', '< 2.0'

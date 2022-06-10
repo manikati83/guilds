@@ -7,10 +7,8 @@ class ToppagesController < ApplicationController
   end
   
   def home
-    @galleries = Gallery.order(id: :desc).limit(5)
-    @guilds = Guild.order(id: :desc).page(params[:page]).per(25)
-    #ページネーション
-    #@guilds = Guild.find(FavoriteGuild.group(:guild_id).order('count(guild_id) desc').limit(25).pluck(:guild_id))
+    @galleries = Gallery.find(FavoriteGallery.group(:gallery_id).order('count(gallery_id) desc').limit(5).pluck(:gallery_id))
+    @guilds = Guild.find(FavoriteGuild.group(:guild_id).order('count(guild_id) desc').pluck(:guild_id))
     @blogs = Blog.find(FavoriteBlog.group(:blog_id).order('count(blog_id) desc').limit(10).pluck(:blog_id))
   end
 end

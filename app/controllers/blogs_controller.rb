@@ -18,6 +18,7 @@ class BlogsController < ApplicationController
   def new
     @blog = Blog.new
     @guild = Guild.find(params[:guild_id])
+    session[:guild_id] = @guild.id
     unless @guild.members.include?(current_user)
       redirect_back(fallback_location: root_path)
     end
@@ -31,7 +32,7 @@ class BlogsController < ApplicationController
   # POST /blogs or /blogs.json
   def create
     @blog = current_user.blogs.build(blog_params)
-    @guild = Guild.find(params[:guild_id])
+    @guild = Guild.find(session[:guild_id])
     @blog.guild_id = @guild.id
     
     if @guild.members.include?(current_user)

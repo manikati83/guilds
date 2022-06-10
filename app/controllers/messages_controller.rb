@@ -1,13 +1,18 @@
 class MessagesController < ApplicationController
   def new
     @guild = Guild.find(params[:id])
-    @messages = @guild.messages.all
-    @new_message = current_user.messages.build
-    @members = @guild.members.order(online: :desc)
+    if @guild.members.include?(current_user)
+      session[:guild_id] = @guild.id
+      @messages = @guild.messages.all
+      @new_message = current_user.messages.build
+      @members = @guild.members.order(online: :desc)
+    else
+      redirect_to @guild
+    end
   end
   
   def create
-    @guild = Guild.find(params[:guild_id])
+    @guild = Guild.find(session[:guild_id])
     @message = current_user.messages.build(message_params)
     @message.guild_id = @guild.id
     @new_message = current_user.messages.build

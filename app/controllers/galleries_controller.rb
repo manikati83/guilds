@@ -1,6 +1,7 @@
 class GalleriesController < ApplicationController
   def new
     @guild = Guild.find(params[:guild_id])
+    session[:guild_id] = @guild.id
     @gallery = @guild.galleries.build
     unless @guild.members.include?(current_user)
       redirect_back(fallback_location: root_path)
@@ -13,7 +14,7 @@ class GalleriesController < ApplicationController
   end
 
   def create
-    @guild = Guild.find(params[:guild_id])
+    @guild = Guild.find(session[:guild_id])
     @gallery = current_user.galleries.build(gallery_params)
     @gallery.guild_id = @guild.id
     if @guild.members.include?(current_user)

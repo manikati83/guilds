@@ -21,7 +21,6 @@
     </div>
     
     <%= form_with(model: @new_message) do |f| %>
-      <%= hidden_field_tag :guild_id, @guild.id %>
       <div id="chat-text-area-group" class="form-group">
          <%= f.text_area :message, id: 'chat-text-area', rows: 3 %>
          <div class="chat-submit-btn">

@@ -1,10 +1,13 @@
 class GuildsController < ApplicationController
   before_action :require_user_logged_in, only: [:new, :create, :edit, :update]
   before_action :set_q
+  before_action :guild_member?, only:[:edit, :update]
+  
   
   def index
     @approval_guilds = current_user.approval_guilds.order(id: :desc).page(params[:page])
     @join_guilds = current_user.join_guilds.order(id: :desc).page(params[:page])
+    @notifications = current_user.notifications.order(id: :desc).limit(50)
   end
   
   def show
@@ -100,7 +103,8 @@ class GuildsController < ApplicationController
       @questing = @guild.quests.where(status: 1).order(id: :desc).page(params[:page]).per(25)
       @quested = @guild.quests.where(status: 2).order(id: :desc).page(params[:page]).per(25)
     else
-      redirect_to @guild
+      #redirect_to @guild
+      @quested = @guild.quests.where(status: 2).order(id: :desc).page(params[:page]).per(25)
     end
   end
   
@@ -139,6 +143,13 @@ class GuildsController < ApplicationController
   
   def guild_params
     params.require(:guild).permit(:name, :content, :guild_type, :join_type, :limit_member, :image, :hashbody, hashtag_ids: [])
+  end
+  
+  def guild_member?
+    @guild = Guild.find(params[:id])
+    unless @guild.user_id == current_user.id
+      redirect_to @guild
+    end
   end
   
 

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   root to: 'toppages#index'
   get 'home', to: 'toppages#home'
+  get 'timeline', to: 'timelines#index'
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

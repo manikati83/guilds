@@ -19,3 +19,13 @@ header .navbar{
   background-color: #673BB7;
   color: white;
 }
+
+.navbar-items{
+  color: rgba(255,255,255,.5);
+  margin-right: 20px;
+}
+
+.navbar-items:hover {
+  color: #DDD;
+  text-decoration: none;
+}

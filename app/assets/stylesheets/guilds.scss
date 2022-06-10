@@ -619,9 +619,6 @@
   min-height: 100vh;
 }
 
-.main{
-  margin: 0 30px;
-}
 
 .blog-show-wrap{
   background-color: #FFF;
@@ -835,6 +832,10 @@ button:focus{
 }
 
 @media screen and (min-width:751px) {
+  .main{
+    margin: 0 30px;
+  }
+  
   #blog-wrap{
     margin-top: 50px;
   }
@@ -955,4 +956,12 @@ button:focus{
     height: 100%;
     object-fit: cover;
   }
+}
+
+
+/*quest */
+.new-quest-btn{
+  text-align: right;
+  margin-top: 50px;
+  margin-right: 5%;
 }
