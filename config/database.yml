@@ -48,9 +48,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  database: re_guilds_production
-  username: re_guilds
-  password: <%= ENV['RE_GUILDS_DATABASE_PASSWORD'] %>
+  <<: *default
+  database: guilds_production
+  username: root
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>
