@@ -2,6 +2,8 @@ class Approval < ApplicationRecord
   belongs_to :user
   belongs_to :guild
   
+  validates :content, presence: true, length: { maximum: 500 }
+  
   
   def how_long_ago
     if (Time.now - self.created_at) <= 60 * 60

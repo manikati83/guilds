@@ -1,14 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
-      <div class="search-guild-tag">
-        <h5>ギルドタグ</h5>
-          <% @guild_tags.each do |tag| %>
-            <li class="mb-2 ml-2" style="list-style: none;"><%= link_to tag.hashname, tags_path(id: tag.id), class: "text-dark" %><span class="ml-2">(<%= tag.guilds.count %>)</span></li></li>
-          <% end %>
-      </div>
-    </div>
-    <div class="col-9">
+    <div class="col-md-9 order-md-2">
       <div id="search">
         <%= search_form_for(@q, url:search_path) do |f| %>
             <div id="search-box">
@@ -44,6 +36,14 @@
       <div class="search-border"></div>
       <div>
         <%= render 'guilds/guilds', guilds: @guilds %>
+      </div>
+    </div>
+    <div class="col-md-3 order-md-1">
+      <div class="search-guild-tag">
+        <h5>ギルドタグ</h5>
+          <% @guild_tags.each do |tag| %>
+            <li class="mb-2 ml-2" style="list-style: none;"><%= link_to tag.hashname, tags_path(id: tag.id), class: "text-dark" %><span class="ml-2">(<%= tag.guilds.count %>)</span></li></li>
+          <% end %>
       </div>
     </div>
   </div>

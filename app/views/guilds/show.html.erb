@@ -80,7 +80,7 @@
     <% @members.each do |member| %>
       <div class="media">
         <div class="media-body">
-          <h3><img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to member.user.name, user_path(id: member.user.id), class: 'guild-name' %></h3>
+          <h3><img class="user-icon" src="<%= gravatar_url(member.user, { size: 30 }) %>" alt="">&nbsp;<%= link_to member.user.name, user_path(id: member.user.id), class: 'guild-name' %></h3>
           <% if member.user.online %>
             <p class="online">オンライン</p>
           <% else %>
