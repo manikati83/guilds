@@ -5,7 +5,7 @@ class Blog < ApplicationRecord
   belongs_to :user
   belongs_to :guild
   belongs_to :guild_blog_tag, optional: true
-  belongs_to :guild_blog_tag, dependent: :destroy
+  belongs_to :guild_blog_tag
   
   has_rich_text :content
   

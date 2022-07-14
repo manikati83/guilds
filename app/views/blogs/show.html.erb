@@ -33,7 +33,7 @@
               </div>
             <% end %>
           <% end %>
-          <p class="mb-0">投稿者&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@guild.user, { size: 30 }) %>" alt="">&nbsp;<%= @blog.user.name %></p>
+          <p class="mb-0">投稿者&nbsp;:&nbsp;<img class="user-icon" src="<%= gravatar_url(@blog.user, { size: 30 }) %>" alt="">&nbsp;<%= @blog.user.name %></p>
           <p>投稿日&nbsp;:&nbsp;<%= @blog.created_at %></p>
           <h3><%= @blog.title %></h3>
           <% if @blog.guild_blog_tag %>

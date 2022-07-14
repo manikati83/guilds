@@ -20,7 +20,7 @@ class QuestMembersController < ApplicationController
     @quest = Quest.find(params[:quest_id])
     join_quest = current_user.quest_members.find_by(quest_id: @quest.id)
     if join_quest
-      if join_quest.leader_id
+      if join_quest.leader
         join_quest.destroy
         if !@quest.members.empty?
           new_leader = @quest.quest_members.first
