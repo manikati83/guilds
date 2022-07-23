@@ -142,7 +142,7 @@
 .search-guild-tag{
   margin-top: 50px;
   border: 2px solid;
-  border-color: #999;
+  border-color: #673bb6;
   border-radius: 10px;
   padding: 20px;
   background-color: #EEE;
@@ -674,10 +674,12 @@ button:focus{
   left: 0;
   z-index: 4;
 }
+
 .dropdown__btn.is-open + .dropdown__body {
   display: block;
   z-index: 5;
 }
+
 .dropdown__body {
   display: none;
   width: 150px;
@@ -687,7 +689,7 @@ button:focus{
   overflow: hidden;
   position: absolute;
   top: 32px;
-  left: 0;
+  right: 0px;
 }
 .dropdown__list {
   margin: 0;

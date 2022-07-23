@@ -32,6 +32,10 @@ class GalleriesController < ApplicationController
   end
 
   def destroy
+    @gallery = current_user.galleries.find_by(id: params[:id])
+    @gallery.destroy
+    flash[:success] = '投稿を削除しました。'
+    redirect_to gallery_guild_path(id: @gallery.guild_id)
   end
   
   

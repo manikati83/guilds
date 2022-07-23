@@ -60,7 +60,7 @@ class GuildsController < ApplicationController
   
   def search
     @guilds = @q.result.order(id: :desc).page(params[:page]).per(25)
-    @guild_tags = Hashtag.find(GuildHashtagRelation.group(:hashtag_id).order('count(hashtag_id) desc').limit(10).pluck(:hashtag_id))
+    @guild_tags = Hashtag.find(GuildHashtagRelation.group(:hashtag_id).order('count(hashtag_id) desc').limit(20).pluck(:hashtag_id))
   end
   
   def blogs

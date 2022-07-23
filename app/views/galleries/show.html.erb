@@ -2,8 +2,22 @@
 
 <div id="gallery-show">
   <div class="row" id="gallery-show-wrap">
-    <div class="col-md-12">
+    <div class="col-md-12 gallery-show-top">
       <h3><img class="user-icon" src="<%= gravatar_url(@gallery.user, { size: 30 }) %>" alt="">&nbsp;<%= @gallery.user.name %></h3>
+      <% if logged_in? %>
+        <% if @gallery.user.id == current_user.id %>
+          <div class="dropdown">
+            <button class="dropdown__btn" id="dropdown__btn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="64"/><circle cx="256" cy="448" r="64"/><circle cx="256" cy="64" r="64"/></svg>
+            </button>
+            <div class="dropdown__body">
+              <ul class="dropdown__list">
+                <li class="dropdown__item"><%= link_to '削除', @gallery, method: :delete, data: { confirm: '投稿を削除しますか？' }, class: 'dropdown__item-link' %></li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-md-6" id="gallery-show-photo">
       <%= image_tag @gallery.photo.url %>
@@ -31,3 +45,18 @@
     </div>
   </div>
 </div>
+
+
+
+<script>
+  (function () {
+      document.addEventListener('DOMContentLoaded', function() { // HTML解析が終わったら
+        const btn = document.getElementById('dropdown__btn'); // ボタンをidで取得
+        if(btn) { // ボタンが存在しないときにエラーになるのを回避
+          btn.addEventListener('click', function(){ //ボタンがクリックされたら
+            this.classList.toggle('is-open'); // is-openを付加する
+          });
+        }
+      });
+    }());
+</script>

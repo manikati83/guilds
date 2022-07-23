@@ -13,7 +13,7 @@
 <div class="photo-wrap">
   <% @galleries.each do |gallery| %>
   <div class="photo-content">
-    <a href="/galleries/<%= gallery.id %>"><%= image_tag gallery.photo.url, class: 'gallery-photo' %></a>
+    <a href="/galleries/<%= gallery.id %>"><%= image_tag gallery.photo.url, class: 'gallery-photo', 'data-turbolinks': false %></a>
   </div>
   <% end %>
 </div>
