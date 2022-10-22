@@ -7,30 +7,7 @@
               <%= f.search_field :name_or_hashbody_cont, class: 'form-control mr-sm-2 search-textfield', placeholder: "Search" %>
               <%= f.submit 'Search', class: 'btn btn-outline-primary my-2 my-sm-0 search-submit' %>
             </div>
-            <div id="search-btn">
-            </div>
-            <div id="search-guild-type">
-              <%= f.label :guild_type, 'ギルドタイプ', class: 'search-label' %>
-              <div class="search-radio-button">
-              <%= f.radio_button :guild_type, true, checked: true %>
-              <%= f.label :guild_type, '指定なし', {value: :nul, style: "display: inline-block;"} %>
-              <%= f.radio_button :guild_type, true %>
-              <%= f.label :guild_type, '依頼あり', {value: :true, style: "display: inline-block;"} %>
-              <%= f.radio_button :guild_type, false %>
-              <%= f.label :guild_type, '依頼なし', {value: :false, style: "display: inline-block;"} %>
-              </div>
-            </div>
-            <div id="search-join-type">
-              <%= f.label :join_type, 'ギルド加入条件', class: 'search-label' %>
-              <div class="search-radio-button">
-                <%= f.radio_button :join_type, true, checked: true %>
-                <%= f.label :join_type, '指定なし', {value: :nil, style: "display: inline-block;"} %>
-                <%= f.radio_button :join_type, true %>
-                <%= f.label :join_type, '承認あり', {value: :true, style: "display: inline-block;"} %>
-                <%= f.radio_button :join_type, false %>
-                <%= f.label :join_type, '承認なし', {value: :false, style: "display: inline-block;"} %>
-              </div>
-            </div>
+            <div id="search-btn"></div>
         <% end %>
       </div>
       <div class="search-border"></div>

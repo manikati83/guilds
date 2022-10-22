@@ -1,7 +1,7 @@
 <div id="sidebar-user-top">
   <div id="sidebar-user-top-icon">
     <img id="sidebar-user-icon" class="user-icon" src="<%= gravatar_url(current_user, { size: 100 }) %>" alt="">
-    <h5><%= current_user.name %></h5>
+    <h5><%= link_to current_user.name, user_path(current_user) %></h5>
   </div>
   <div id="sidebar-user-top-content">
     <p>加入ギルド：&nbsp;<%= current_user.join_guilds.count %></p>
@@ -11,7 +11,5 @@
 <div id="sidebar-user-menu">
   <ul class="sidebar-user-menu">
     <li><a href="/users/<%= current_user.id %>/favorite_guilds"><i class="fa fa-star fa-lg"></i>&nbsp;<span>お気に入り</span></a></li>
-    <li><i class="fa fa-bell fa-lg"></i>&nbsp;<span>通知</span></li>
-    <li><i class="fa fa-award fa-lg"></i>&nbsp;<span>実績</span></li>
   </ul>
 </div>
